@@ -90,9 +90,9 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             MiscMenu.Add(new MenuCheckbox("AutoStackPassive", "Auto Stack Passive", true));
             MiscMenu.Add(new MenuSlider("StackPassiveManaSpawn", "Min Mana % to use W/E in Spawn", 0, 100, 90));
             MiscMenu.Add(new MenuSlider("StackPassiveMana", "Min Mana % to Auto Stack with E", 0, 100, 90));
-            MiscMenu.AddSeparator("-Interrupt-");
+            /* MiscMenu.AddSeparator("-Interrupt-");
             MiscMenu.Add(new MenuCheckbox("InterruptOnGapCloser", "Interrupt Enemy GapCloser with Stun", true));
-            /* MiscMenu.Add(new MenuCheckbox("InterruptPassive", "Use Passive to Interrupt Enemy"));
+            MiscMenu.Add(new MenuCheckbox("InterruptPassive", "Use Passive to Interrupt Enemy"));
             MiscMenu.Add(new MenuCheckbox("InterruptR", "Use R to Interrupt Enemy")); TODO: IMPLEMENT */
             /* Misc.AddSeparator("-Auto Leveler-"); 
             Misc.Add(new MenuCheckbox("AutoLevel", "Enable Auto Leveler"));

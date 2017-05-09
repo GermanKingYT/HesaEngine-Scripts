@@ -21,7 +21,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE
                 Drawings.Initialize();
                 DamageIndicator.Initialize();
                 ModeManager.Initialize();
-                Interrupt.Initialize();
+                /* Interrupt.Initialize(); TODO: IMPLEMENT LATER AGAIN */
             }
             catch (Exception _Exception)
             {

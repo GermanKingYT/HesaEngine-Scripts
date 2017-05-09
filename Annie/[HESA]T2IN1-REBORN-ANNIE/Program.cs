@@ -7,7 +7,7 @@ namespace _HESA_T2IN1_REBORN
 {
     public class Program :IScript
     {
-        public string Name => "[T2IN1] REBORN AIO";
+        public string Name => "[T2IN1] REBORN ANNIE";
         public string Version => "1.0";
         public string Author => "RaINI";
 
@@ -18,7 +18,7 @@ namespace _HESA_T2IN1_REBORN
 
         private void Game_OnGameLoaded()
         {
-            Chat.Print("<font color='#ecf0f1'>[T2IN1-REBORN] </font>AIO Version: 1.0");
+            Chat.Print("<font color='#ecf0f1'>[T2IN1-REBORN] </font>ANNIE Version: 1.0");
 
             if (Globals.MyHero.Hero.Equals(Champion.Annie))
             {

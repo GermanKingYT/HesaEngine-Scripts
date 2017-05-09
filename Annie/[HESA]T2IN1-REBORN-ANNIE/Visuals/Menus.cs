@@ -46,11 +46,11 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             LaneClearMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
             LaneClearMenu.Add(new MenuCheckbox("UseOnlyIfKillable", "Use Q only if Killable", true));
             LaneClearMenu.Add(new MenuCheckbox("UseW", "Use W", true));
+            LaneClearMenu.Add(new MenuSlider("MinMinions", "Min Minions Hitable to use W", 1, 5, 3));
             LaneClearMenu.AddSeparator("-Extra Options-");
             LaneClearMenu.Add(new MenuCheckbox("StopIfPassiveIsCharged", "Dont use Spells if Passive is Charged"));
-            LaneClearMenu.Add(new MenuSlider("MinMinions", "Min Minions Hitable to use W", 1, 5, 3));
             LaneClearMenu.AddSeparator("-Mana Options-");
-            LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 45));
+            LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana Percent to use Spells", 0, 100, 45));
 
             /* LastHit Section */
             LastHitMenu = Home.AddSubMenu("> LAST HIT");
@@ -68,7 +68,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             VisualsMenu.AddSeparator("-Drawings-");
             VisualsMenu.Add(new MenuCheckbox("DrawSpellsRange", "Draw Spells Range", true));
             VisualsMenu.Add(new MenuCheckbox("DrawDamage", "Draw Damage Indicator", true));
-            VisualsMenu.Add(new MenuCheckbox("DrawBoundingRadius", "Draw Champion Hit Radius", true));
+            VisualsMenu.Add(new MenuCheckbox("DrawBoundingRadius", "Draw Enemy Champion Hit Radius", true));
             VisualsMenu.Add(new MenuCheckbox("DrawPredictionR", "Draw R Prediction", true));
             VisualsMenu.Add(new MenuCheckbox("DrawPredictionW", "Draw W Prediction", true));
             VisualsMenu.AddSeparator("-Spell Drawing Options-");

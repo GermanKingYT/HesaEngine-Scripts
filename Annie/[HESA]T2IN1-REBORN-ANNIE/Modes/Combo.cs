@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using _HESA_T2IN1_REBORN.Champions.Annie.Visuals;
-using _HESA_T2IN1_REBORN.Champions.Annie.Managers;
+using _HESA_T2IN1_REBORN_ANNIE.Managers;
+using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
 using HesaEngine.SDK.GameObjects;
 using SharpDX;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie.Modes
+namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 {
     internal class Combo
     {
@@ -35,7 +35,6 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Modes
             _TargetQ = TargetSelector.GetTarget(SpellsManager.Q.Range);
             _TargetW = TargetSelector.GetTarget(SpellsManager.W.Range);
             _TargetR = TargetSelector.GetTarget(SpellsManager.R.Range);
-
 
             if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked)
             {

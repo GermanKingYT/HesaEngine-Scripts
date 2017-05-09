@@ -1,12 +1,12 @@
 ﻿using System;
 
-using _HESA_T2IN1_REBORN.Champions.Annie.Managers;
-using _HESA_T2IN1_REBORN.Champions.Annie.Visuals;
-using _HESA_T2IN1_REBORN.Champions.Annie.Features;
+using _HESA_T2IN1_REBORN_ANNIE.Features;
+using _HESA_T2IN1_REBORN_ANNIE.Managers;
+using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie
+namespace _HESA_T2IN1_REBORN_ANNIE
 {
     internal class Initialize
     {

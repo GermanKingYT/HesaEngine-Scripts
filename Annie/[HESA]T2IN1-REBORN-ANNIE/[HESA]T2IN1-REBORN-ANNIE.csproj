@@ -77,20 +77,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annie\Features\AutoLevel.cs" />
-    <Compile Include="Annie\Features\Interrupt.cs" />
-    <Compile Include="Annie\Globals.cs" />
-    <Compile Include="Annie\Initialize.cs" />
-    <Compile Include="Annie\Managers\ModeManager.cs" />
-    <Compile Include="Annie\Managers\SpellsManager.cs" />
-    <Compile Include="Annie\Modes\Combo.cs" />
-    <Compile Include="Annie\Modes\LaneClear.cs" />
-    <Compile Include="Annie\Modes\LastHit.cs" />
-    <Compile Include="Annie\Modes\PermActive.cs" />
-    <Compile Include="Annie\Modes\Tibbers.cs" />
-    <Compile Include="Annie\Visuals\DamageIndicator.cs" />
-    <Compile Include="Annie\Visuals\Drawings.cs" />
-    <Compile Include="Annie\Visuals\Menus.cs" />
+    <Compile Include="Features\AutoLevel.cs" />
+    <Compile Include="Features\Interrupt.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Initialize.cs" />
+    <Compile Include="Managers\ModeManager.cs" />
+    <Compile Include="Managers\SpellsManager.cs" />
+    <Compile Include="Modes\Combo.cs" />
+    <Compile Include="Modes\LaneClear.cs" />
+    <Compile Include="Modes\LastHit.cs" />
+    <Compile Include="Modes\PermActive.cs" />
+    <Compile Include="Modes\Tibbers.cs" />
+    <Compile Include="Visuals\DamageIndicator.cs" />
+    <Compile Include="Visuals\Drawings.cs" />
+    <Compile Include="Visuals\Menus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

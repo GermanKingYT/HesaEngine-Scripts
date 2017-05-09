@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using _HESA_T2IN1_REBORN.Champions.Annie.Managers;
+using _HESA_T2IN1_REBORN_ANNIE.Managers;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
 using HesaEngine.SDK.GameObjects;
 using SharpDX;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie
+namespace _HESA_T2IN1_REBORN_ANNIE
 {
     internal static class Globals
     {

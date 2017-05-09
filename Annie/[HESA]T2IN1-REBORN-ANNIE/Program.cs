@@ -1,4 +1,4 @@
-﻿using _HESA_T2IN1_REBORN.Champions.Annie;
+﻿using _HESA_T2IN1_REBORN_ANNIE;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;

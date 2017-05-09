@@ -1,10 +1,10 @@
-﻿using _HESA_T2IN1_REBORN.Champions.Annie.Visuals;
+﻿using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
 using HesaEngine.SDK.GameObjects;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie.Features
+namespace _HESA_T2IN1_REBORN_ANNIE.Features
 {
     internal static class AutoLevel
     {

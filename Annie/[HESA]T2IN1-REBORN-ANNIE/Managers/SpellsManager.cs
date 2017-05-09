@@ -3,7 +3,7 @@
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie.Managers
+namespace _HESA_T2IN1_REBORN_ANNIE.Managers
 {
     internal class SpellsManager
     {

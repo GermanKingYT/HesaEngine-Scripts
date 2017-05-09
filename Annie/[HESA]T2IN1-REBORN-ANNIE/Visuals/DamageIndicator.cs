@@ -6,7 +6,7 @@ using HesaEngine.SDK.Enums;
 using HesaEngine.SDK.GameObjects;
 using SharpDX;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie.Visuals
+namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 {
     internal static class DamageIndicator
     {

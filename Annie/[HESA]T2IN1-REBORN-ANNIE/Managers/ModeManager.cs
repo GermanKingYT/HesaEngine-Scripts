@@ -1,10 +1,10 @@
-﻿using System;
+﻿using _HESA_T2IN1_REBORN_ANNIE.Modes;
+using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
-using _HESA_T2IN1_REBORN.Champions.Annie.Visuals;
-
+using System;
 using HesaEngine.SDK;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie.Managers
+namespace _HESA_T2IN1_REBORN_ANNIE.Managers
 {
     internal static class ModeManager
     {
@@ -23,13 +23,13 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Managers
             var _MyManaPercent = Globals.MyHero.ManaPercent;
 
             /* PERMA ACTIVE */
-            Modes.PermActive.Initialize();
+            PermActive.Initialize();
 
             switch (_OrbwalkerMode)
             {
                 case Orbwalker.OrbwalkingMode.Combo:
                 {
-                    Modes.Combo.Run();
+                    Combo.Run();
                     break;
                 }
 
@@ -37,7 +37,7 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Managers
                 {
                     if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < _MyManaPercent)
                     {
-                        Modes.LaneClear.Run();
+                        LaneClear.Run();
                     }
                     break;
                 }
@@ -46,7 +46,7 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Managers
                 {
                     if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < _MyManaPercent)
                     {
-                        Modes.LastHit.Run();
+                        LastHit.Run();
                     }
                     break;
                 }

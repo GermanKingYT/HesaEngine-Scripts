@@ -2,7 +2,7 @@
 
 using HesaEngine.SDK;
 
-namespace _HESA_T2IN1_REBORN.Champions.Annie.Visuals
+namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 {
     internal class Menus
     {
@@ -22,16 +22,16 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Visuals
 
             /* Activator Section */
             ActivatorMenu = Home.AddSubMenu("> ACTIVATOR");
-            ActivatorMenu.Add(new MenuCheckbox("AutoUsePots", "Auto use Health Pots"));
+            ActivatorMenu.Add(new MenuCheckbox("AutoUsePots", "Auto use Health Pots", true));
             ActivatorMenu.Add(new MenuCheckbox("AutoUsePotsOnBuff", "Auto use Health Pots if Poisened / has Damage Buff", true));
             ActivatorMenu.Add(new MenuSlider("AutoUsePotsHealth", "Use if Health Percent is below or equal", 1, 100, 30));
 
             /* Combo Section */
             ComboMenu = Home.AddSubMenu("> COMBO");
-            ComboMenu.Add(new MenuCheckbox("UseQ", "Use Q in Combo"));
-            ComboMenu.Add(new MenuCheckbox("UseW", "Use W in Combo"));
-            ComboMenu.Add(new MenuCheckbox("UseE", "Use E in Combo (if Stun is not ready)"));
-            ComboMenu.Add(new MenuCheckbox("UseR", "Use R in Combo"));
+            ComboMenu.Add(new MenuCheckbox("UseQ", "Use Q in Combo", true));
+            ComboMenu.Add(new MenuCheckbox("UseW", "Use W in Combo", true));
+            ComboMenu.Add(new MenuCheckbox("UseE", "Use E in Combo (if Stun is not ready)", true));
+            ComboMenu.Add(new MenuCheckbox("UseR", "Use R in Combo", true));
             ComboMenu.Add(new MenuCheckbox("OnlyIfStunReadyR", "Use R only if Stun is ready"));
             ComboMenu.Add(new MenuSlider("UltimateTargets", "Min Enemys Hitable to use R", 1, 5, 1));
             ComboMenu.AddSeparator("-Tibbers Options-");
@@ -47,10 +47,10 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Visuals
             LaneClearMenu.Add(new MenuCheckbox("UseOnlyIfKillable", "Use Q only if Killable", true));
             LaneClearMenu.Add(new MenuCheckbox("UseW", "Use W", true));
             LaneClearMenu.AddSeparator("-Extra Options-");
-            LaneClearMenu.Add(new MenuCheckbox("StopIfPassiveIsCharged", "Dont use Spells if Passive is Charged", true));
+            LaneClearMenu.Add(new MenuCheckbox("StopIfPassiveIsCharged", "Dont use Spells if Passive is Charged"));
             LaneClearMenu.Add(new MenuSlider("MinMinions", "Min Minions Hitable to use W", 1, 5, 3));
             LaneClearMenu.AddSeparator("-Mana Options-");
-            LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 65));
+            LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 45));
 
             /* LastHit Section */
             LastHitMenu = Home.AddSubMenu("> LAST HIT");
@@ -59,7 +59,7 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Visuals
             LastHitMenu.Add(new MenuCheckbox("UseW", "Use W", true));
             LastHitMenu.AddSeparator("-Extra Options-");
             /* LastHit.Add(new MenuSlider("MinMinions", "Minimun Minions Killable to use W", 1, 5, 3)); TODO: MAYBE IMPLEMENT */
-            LastHitMenu.Add(new MenuCheckbox("StopIfPassiveIsCharged", "Dont use Spells if Passive is charged", true));
+            LastHitMenu.Add(new MenuCheckbox("StopIfPassiveIsCharged", "Dont use Spells if Passive is charged"));
             LastHitMenu.AddSeparator("-Mana Options-");
             LastHitMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 45));
 
@@ -87,7 +87,7 @@ namespace _HESA_T2IN1_REBORN.Champions.Annie.Visuals
             MiscMenu.AddSeparator("-Killsteal-");
             MiscMenu.Add(new MenuCheckbox("KillSteal", "Auto KillSteal"));
             MiscMenu.AddSeparator("-Passive-");
-            MiscMenu.Add(new MenuCheckbox("AutoStackPassive", "Auto Stack Passive"));
+            MiscMenu.Add(new MenuCheckbox("AutoStackPassive", "Auto Stack Passive", true));
             MiscMenu.Add(new MenuSlider("StackPassiveManaSpawn", "Min Mana % to use W/E in Spawn", 0, 100, 90));
             MiscMenu.Add(new MenuSlider("StackPassiveMana", "Min Mana % to Auto Stack with E", 0, 100, 90));
             MiscMenu.AddSeparator("-Interrupt-");

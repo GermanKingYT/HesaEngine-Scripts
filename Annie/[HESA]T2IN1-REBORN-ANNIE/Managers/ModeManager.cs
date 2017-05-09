@@ -1,7 +1,8 @@
-﻿using _HESA_T2IN1_REBORN_ANNIE.Modes;
+﻿using System;
+
+using _HESA_T2IN1_REBORN_ANNIE.Modes;
 using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
-using System;
 using HesaEngine.SDK;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Managers
@@ -32,7 +33,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
                     Combo.Run();
                     break;
                 }
-
                 case Orbwalker.OrbwalkingMode.LaneClear:
                 {
                     if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < _MyManaPercent)
@@ -41,7 +41,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
                     }
                     break;
                 }
-
                 case Orbwalker.OrbwalkingMode.LastHit:
                 {
                     if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < _MyManaPercent)

@@ -56,8 +56,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
             {
                 if (!Globals.IsStunReady())
                 {
-                    var _MyMana = Globals.MyHero.ManaPercent;
-                    if (Globals.MyHero.InFountain() && _MyMana > Menus.MiscMenu.Get<MenuSlider>("StackPassiveManaSpawn").CurrentValue)
+                    if (Globals.MyHero.InFountain() && Globals.MyManaPercent > Menus.MiscMenu.Get<MenuSlider>("StackPassiveManaSpawn").CurrentValue)
                     {
                         if (Globals.CanUseSpell(SpellSlot.E))
                         {
@@ -71,7 +70,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                     }
                     else
                     {
-                        if (_MyMana > Menus.MiscMenu.Get<MenuSlider>("StackPassiveMana").CurrentValue)
+                        if (Globals.MyManaPercent > Menus.MiscMenu.Get<MenuSlider>("StackPassiveMana").CurrentValue)
                         {
                             if (Globals.CanUseSpell(SpellSlot.E))
                             {

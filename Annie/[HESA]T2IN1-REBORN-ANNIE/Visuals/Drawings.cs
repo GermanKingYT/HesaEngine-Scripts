@@ -73,7 +73,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             }
 
             /* TODO: OPTIMIZE */
-            if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawPredictionW").Checked)
+            if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawPredictionW").Checked && Globals.OrbwalkerMode != Orbwalker.OrbwalkingMode.Combo)
             {
                 if (Globals.CanUseSpell(SpellSlot.W))
                 {
@@ -82,7 +82,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
                     {
                         if (_PredictionW != Vector3.Zero)
                         {
-                            if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHero.ManaPercent)
+                            if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyManaPercent)
                             {
                                 if (Menus.LaneClearMenu.Get<MenuCheckbox>("StopIfPassiveIsCharged").Checked)
                                 {

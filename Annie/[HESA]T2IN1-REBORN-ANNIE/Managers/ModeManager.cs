@@ -20,13 +20,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
             if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
                 return;
 
-            var _OrbwalkerMode = Globals.Orb.ActiveMode;
-            var _MyManaPercent = Globals.MyHero.ManaPercent;
-
             /* PERMA ACTIVE */
             PermActive.Initialize();
 
-            switch (_OrbwalkerMode)
+            switch (Globals.OrbwalkerMode)
             {
                 case Orbwalker.OrbwalkingMode.Combo:
                 {
@@ -35,7 +32,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
                 }
                 case Orbwalker.OrbwalkingMode.LaneClear:
                 {
-                    if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < _MyManaPercent)
+                    if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyManaPercent)
                     {
                         LaneClear.Run();
                     }
@@ -43,7 +40,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
                 }
                 case Orbwalker.OrbwalkingMode.LastHit:
                 {
-                    if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < _MyManaPercent)
+                    if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyManaPercent)
                     {
                         LastHit.Run();
                     }

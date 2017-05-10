@@ -47,22 +47,19 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 }
             }  
 
-            if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked)
+            if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked && Globals.CanUseSpell(SpellSlot.R))
             {
-                if (Menus.ComboMenu.Get<MenuCheckbox>("UseR").Checked)
+                if (Globals.IsStunReady())
                 {
-                    if (Globals.CanUseSpell(SpellSlot.R) && Globals.IsStunReady())
+                    if (Globals.IsTargetValidWithRange(_TargetR, SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
                     {
-                        if (Globals.IsTargetValidWithRange(_TargetR, SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
+                        _PredictionR = Globals.GetBestUltimatePosition(_TargetR.ServerPosition.To2D());
+                        if (_PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
                         {
-                            _PredictionR = Globals.GetBestUltimatePosition(_TargetR.ServerPosition.To2D());
-                            if (_PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
+                            _PredictedRPosition = _PredictionR.Keys.First().To3D();
+                            if (_PredictedRPosition != Vector3.Zero)
                             {
-                                _PredictedRPosition = _PredictionR.Keys.First().To3D();
-                                if (_PredictedRPosition != Vector3.Zero)
-                                {
-                                    SpellsManager.R.Cast(_PredictedRPosition);
-                                }
+                                SpellsManager.R.Cast(_PredictedRPosition);
                             }
                         }
                     }

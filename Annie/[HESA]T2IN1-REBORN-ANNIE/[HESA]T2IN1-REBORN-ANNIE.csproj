@@ -80,7 +80,6 @@
     <Compile Include="Features\AutoLevel.cs" />
     <Compile Include="Features\Interrupt.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Initialize.cs" />
     <Compile Include="Managers\ModeManager.cs" />
     <Compile Include="Managers\SpellsManager.cs" />
     <Compile Include="Modes\Combo.cs" />

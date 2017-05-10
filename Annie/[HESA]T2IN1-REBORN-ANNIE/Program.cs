@@ -1,4 +1,8 @@
-﻿using _HESA_T2IN1_REBORN_ANNIE;
+﻿using System;
+
+using _HESA_T2IN1_REBORN_ANNIE;
+using _HESA_T2IN1_REBORN_ANNIE.Managers;
+using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
@@ -8,7 +12,7 @@ namespace _HESA_T2IN1_REBORN
     public class Program :IScript
     {
         public string Name => "[T2IN1-REBORN] Annie";
-        public string Version => "1.0";
+        public string Version => "1.1";
         public string Author => "RaINI";
 
         public void OnInitialize()
@@ -22,7 +26,23 @@ namespace _HESA_T2IN1_REBORN
 
             if (Globals.MyHero.Hero.Equals(Champion.Annie))
             {
-                Initialize.Run();
+                Console.Clear();
+
+                try
+                {
+                    SpellsManager.Initialize();
+                    Menus.Initialize();
+                    Drawings.Initialize();
+                    DamageIndicator.Initialize();
+                    ModeManager.Initialize();
+                    /* Interrupt.Initialize(); TODO: IMPLEMENT LATER AGAIN */
+                }
+                catch (Exception _Exception)
+                {
+                    Logger.Log("Error: " + _Exception, ConsoleColor.Red);
+                }
+
+                Chat.Print("<font color='#27ae60'>[T2IN1-REBORN] </font>" + Globals.MyHero.ChampionName + " Script is ready");
             }
             else
             {

@@ -32,7 +32,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
                 }
                 case Orbwalker.OrbwalkingMode.LaneClear:
                 {
-                    if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyManaPercent)
+                    if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent)
                     {
                         LaneClear.Run();
                     }
@@ -40,7 +40,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
                 }
                 case Orbwalker.OrbwalkingMode.LastHit:
                 {
-                    if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyManaPercent)
+                    if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent)
                     {
                         LastHit.Run();
                     }

@@ -18,7 +18,9 @@ namespace _HESA_T2IN1_REBORN_ANNIE
         public static Random Randomizer = new Random();
 
         public static Orbwalker.OrbwalkingMode OrbwalkerMode = Orb.ActiveMode;
-        public static float MyManaPercent = MyHero.ManaPercent;
+        public static float MyHeroManaPercent = MyHero.ManaPercent;
+        public static int MyHeroLevel = MyHero.Level;
+        public static int MyHeroSpellTrainingsPoints = MyHero.SpellTrainingPoints;
 
         public static AIHeroClient MyHero => ObjectManager.Me;
         public static Orbwalker.OrbwalkerInstance Orb;

@@ -82,7 +82,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
                     {
                         if (_PredictionW != Vector3.Zero)
                         {
-                            if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyManaPercent)
+                            if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent)
                             {
                                 if (Menus.LaneClearMenu.Get<MenuCheckbox>("StopIfPassiveIsCharged").Checked)
                                 {

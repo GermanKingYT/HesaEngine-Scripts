@@ -20,8 +20,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
             W.SetSkillshot(0.6f, 1f, float.MaxValue, false, SkillshotType.SkillshotLine);
             R.SetSkillshot(0.5f, 200f, float.MaxValue, false, SkillshotType.SkillshotCircle);
 
-            /* AIHeroClient.OnLevelUp += AutoLevel.OnLevelUp; TODO: Nullptr */
-
             Logger.Log(">> Executed", ConsoleColor.Green);
         }
     }

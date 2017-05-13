@@ -6,7 +6,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 {
     internal class Menus
     {
-        public static Menu Home;
+        public static Menu HomeMenu;
         public static Menu ActivatorMenu;
         public static Menu ComboMenu;
         public static Menu LaneClearMenu;
@@ -16,18 +16,18 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 
         public static void Initialize()
         {
-            Home = Menu.AddMenu("[T2IN1-REBORN] " + Globals.MyHero.ChampionName);
+            HomeMenu = Menu.AddMenu("[T2IN1-REBORN] " + Globals.MyHero.ChampionName);
 
-            Globals.Orb = new Orbwalker.OrbwalkerInstance(Home.AddSubMenu("> ORBWALKER"));
+            Globals.Orb = new Orbwalker.OrbwalkerInstance(HomeMenu.AddSubMenu("> ORBWALKER"));
 
             /* Activator Section */
-            ActivatorMenu = Home.AddSubMenu("> ACTIVATOR");
+            ActivatorMenu = HomeMenu.AddSubMenu("> ACTIVATOR");
             ActivatorMenu.Add(new MenuCheckbox("AutoUsePots", "Auto use Health Pots", true));
             ActivatorMenu.Add(new MenuCheckbox("AutoUsePotsOnBuff", "Auto use Health Pots if Poisened / has Damage Buff", true));
             ActivatorMenu.Add(new MenuSlider("AutoUsePotsHealth", "Use if Health Percent is below or equal", 1, 100, 30));
 
             /* Combo Section */
-            ComboMenu = Home.AddSubMenu("> COMBO");
+            ComboMenu = HomeMenu.AddSubMenu("> COMBO");
             ComboMenu.Add(new MenuCheckbox("UseQ", "Use Q in Combo", true));
             ComboMenu.Add(new MenuCheckbox("UseW", "Use W in Combo", true));
             ComboMenu.Add(new MenuCheckbox("UseE", "Use E in Combo (if Stun is not ready)", true));
@@ -41,7 +41,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             ComboMenu.Add(new MenuCheckbox("DontAttackIfUnderTurret", "Dont Attack if Target is under Turret", true));
 
             /* LaneClear Section */
-            LaneClearMenu = Home.AddSubMenu("> LANE CLEAR");
+            LaneClearMenu = HomeMenu.AddSubMenu("> LANE CLEAR");
             LaneClearMenu.AddSeparator("-Spells-");
             LaneClearMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
             LaneClearMenu.Add(new MenuCheckbox("UseOnlyIfKillable", "Use Q only if Killable", true));
@@ -53,7 +53,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana Percent to use Spells", 0, 100, 45));
 
             /* LastHit Section */
-            LastHitMenu = Home.AddSubMenu("> LAST HIT");
+            LastHitMenu = HomeMenu.AddSubMenu("> LAST HIT");
             LastHitMenu.AddSeparator("-Spells-");
             LastHitMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
             LastHitMenu.Add(new MenuCheckbox("UseW", "Use W", true));
@@ -64,7 +64,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             LastHitMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 45));
 
             /* Visuals Section */
-            VisualsMenu = Home.AddSubMenu("> VISUALS");
+            VisualsMenu = HomeMenu.AddSubMenu("> VISUALS");
             VisualsMenu.AddSeparator("-Drawings-");
             VisualsMenu.Add(new MenuCheckbox("DrawSpellsRange", "Draw Spells Range", true));
             VisualsMenu.Add(new MenuCheckbox("DrawDamage", "Draw Damage Indicator", true));
@@ -81,7 +81,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             VisualsMenu.Add(new MenuCheckbox("DrawOnlyWhenReadyR", "Draw R only when ready", true));
 
             /* Misc Section */
-            MiscMenu = Home.AddSubMenu("> MISC");
+            MiscMenu = HomeMenu.AddSubMenu("> MISC");
             MiscMenu.AddSeparator("-Summoners-");
             MiscMenu.Add(new MenuCheckbox("AutoIgnite", "Auto use Ignite if Killable"));
             MiscMenu.AddSeparator("-Killsteal-");

@@ -13,7 +13,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
         {
             if (Menus.LaneClearMenu.Get<MenuCheckbox>("StopIfPassiveIsCharged").Checked)
             {
-                if (Globals.IsStunReady())
+                if (Globals.IsStunReady)
                 {
                     return;
                 }

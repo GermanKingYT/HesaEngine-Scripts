@@ -17,19 +17,27 @@ namespace _HESA_T2IN1_REBORN_ANNIE
     {
         public static Random Randomizer = new Random();
 
-        public static Orbwalker.OrbwalkingMode OrbwalkerMode = Orb.ActiveMode;
-        public static float MyHeroManaPercent = MyHero.ManaPercent;
-        public static int MyHeroLevel = MyHero.Level;
-        public static int MyHeroSpellTrainingsPoints = MyHero.SpellTrainingPoints;
-
+        public static float MyHeroManaPercent => MyHero.ManaPercent;
         public static AIHeroClient MyHero => ObjectManager.Me;
-        public static Orbwalker.OrbwalkerInstance Orb;
 
-        public static Obj_AI_Minion Tibbers;
-        public static bool IsTibbersSpawned;
+        public static bool IsEmpty<T>(this IEnumerable<T> source) => !source.Any();
 
-        private static Obj_AI_Base _LastMinion;
+        public static bool CanUseSpell(SpellSlot spell) => MyHero.Spellbook.GetSpellState(spell) == SpellState.Ready;
+        public static bool AllSpellsReady => CanUseSpell(SpellSlot.Q) && CanUseSpell(SpellSlot.W) && CanUseSpell(SpellSlot.R);
 
+        public static Orbwalker.OrbwalkerInstance Orb { get; set; }
+        public static Orbwalker.OrbwalkingMode OrbwalkerMode => Orb.ActiveMode;
+
+        public static bool IsTargetValid(AIHeroClient target) => target != null && target.IsValidTarget();
+        public static bool IsTargetValidWithRange(AIHeroClient target, float range) => target != null && target.IsValidTarget(range);
+        public static bool IsObjectValid(Obj_AI_Base target) => target != null && target.IsValidTarget();
+        public static bool IsObjectValidWithRange(Obj_AI_Base target, float range) => target != null && target.IsValidTarget(range);
+
+        public static Obj_AI_Minion Tibbers { get; set; }
+        public static bool IsTibbersSpawned { get; set; }
+        public static bool IsStunReady => MyHero.HasBuff("pyromania_particle");
+
+        private static Obj_AI_Base _LastMinion { get; set; }
         public static Obj_AI_Base GetLaneMinion(Spell daSpell)
         {
             var _Minions = MinionManager.GetMinions(daSpell.Range).OrderBy(x => x.Health);
@@ -52,19 +60,9 @@ namespace _HESA_T2IN1_REBORN_ANNIE
             return null;
         }
 
-        public static bool IsStunReady()
-        {
-            return MyHero.HasBuff("pyromania_particle");
-        }
-
         public static void DelayAction(Action action)
         {
             Core.DelayAction(action, Randomizer.Next(300, 500));
-        }
-
-        public static bool AllSpellsReady()
-        {
-            return CanUseSpell(SpellSlot.Q) && CanUseSpell(SpellSlot.W) && CanUseSpell(SpellSlot.R);
         }
 
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
@@ -249,21 +247,11 @@ namespace _HESA_T2IN1_REBORN_ANNIE
             }
         }
 
-        public static bool CanUseSpell(SpellSlot spell)
-        {
-            return MyHero.Spellbook.GetSpellState(spell) == SpellState.Ready;
-        }
-
         public static Task Delay(int milliseconds)
         {
             var tcs = new TaskCompletionSource<object>();
             new Timer(_ => tcs.SetResult(null)).Change(milliseconds, -1);
             return tcs.Task;
-        }
-
-        public static bool IsEmpty<T>(this IEnumerable<T> source)
-        {
-            return !source.Any();
         }
 
         public static int RandomDigits(int length)
@@ -274,26 +262,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE
                 _Number = Randomizer.Next(10);
             }
             return _Number;
-        }
-
-        public static bool IsTargetValid(AIHeroClient target)
-        {
-            return target != null && target.IsValidTarget();
-        }
-
-        public static bool IsTargetValidWithRange(AIHeroClient target, float range)
-        {
-            return target != null && target.IsValidTarget(range);
-        }
-
-        public static bool IsObjectValid(Obj_AI_Base target)
-        {
-            return target != null && target.IsValidTarget();
-        }
-
-        public static bool IsObjectValidWithRange(Obj_AI_Base target, float range)
-        {
-            return target != null && target.IsValidTarget(range);
         }
     }
 }

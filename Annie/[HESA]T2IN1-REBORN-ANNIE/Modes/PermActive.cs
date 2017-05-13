@@ -54,7 +54,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
             /* Auto Stack Passive */
             if (Menus.MiscMenu.Get<MenuCheckbox>("AutoStackPassive").Checked && !Globals.MyHero.IsRecalling())
             {
-                if (!Globals.IsStunReady())
+                if (!Globals.IsStunReady)
                 {
                     if (Globals.MyHero.InFountain() && Globals.MyHeroManaPercent > Menus.MiscMenu.Get<MenuSlider>("StackPassiveManaSpawn").CurrentValue)
                     {

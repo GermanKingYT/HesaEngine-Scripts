@@ -56,7 +56,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
                         {
                             if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked)
                             {
-                                if (Globals.IsStunReady())
+                                if (Globals.IsStunReady)
                                 {
                                     Drawing.DrawCircle(_PositionAndHits.First().Key.To3DWorld(), 70, Color.OrangeRed);
                                     Drawing.DrawLine(Globals.MyHero.Position, _PositionAndHits.First().Key.To3DWorld(), Color.OrangeRed, 2);
@@ -86,7 +86,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
                             {
                                 if (Menus.LaneClearMenu.Get<MenuCheckbox>("StopIfPassiveIsCharged").Checked)
                                 {
-                                    if (!Globals.IsStunReady())
+                                    if (!Globals.IsStunReady)
                                     {
                                         Drawing.DrawLine(Globals.MyHero.Position, _PredictionW, Color.GreenYellow, 2);
                                         Drawing.DrawCircle(_PredictionW, 70, Color.GreenYellow);

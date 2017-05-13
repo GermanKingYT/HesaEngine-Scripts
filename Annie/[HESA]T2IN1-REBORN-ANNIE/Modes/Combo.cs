@@ -40,16 +40,16 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
             {
                 if (Globals.CanUseSpell(SpellSlot.E))
                 {
-                    if (!Globals.IsStunReady())
+                    if (!Globals.IsStunReady)
                     {
                         SpellsManager.E.Cast();
                     }
                 }
-            }  
+            }
 
             if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked && Globals.CanUseSpell(SpellSlot.R))
             {
-                if (Globals.IsStunReady())
+                if (Globals.IsStunReady)
                 {
                     if (Globals.IsTargetValidWithRange(_TargetR, SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
                     {
@@ -67,7 +67,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
                 if (Menus.ComboMenu.Get<MenuCheckbox>("UseQ").Checked)
                 {
-                    if (Globals.CanUseSpell(SpellSlot.Q) && !Globals.IsStunReady())
+                    if (Globals.CanUseSpell(SpellSlot.Q) && !Globals.IsStunReady)
                     {
                         if (Globals.IsTargetValidWithRange(_TargetQ, SpellsManager.Q.Range))
                         {
@@ -78,7 +78,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
                 if (Menus.ComboMenu.Get<MenuCheckbox>("UseW").Checked)
                 {
-                    if (Globals.CanUseSpell(SpellSlot.W) && !Globals.IsStunReady())
+                    if (Globals.CanUseSpell(SpellSlot.W) && !Globals.IsStunReady)
                     {
                         if (Globals.IsTargetValidWithRange(_TargetW, SpellsManager.W.Range))
                         {

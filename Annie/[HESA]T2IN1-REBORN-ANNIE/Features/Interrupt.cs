@@ -12,7 +12,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
         {
             Logger.Log(gapcloser.Sender.IsMe ? "It's me?" : "It's him?");
 
-            if (Menus.MiscMenu.Get<MenuCheckbox>("InterruptOnGapCloser").Checked && Globals.IsStunReady())
+            if (Menus.MiscMenu.Get<MenuCheckbox>("InterruptOnGapCloser").Checked && Globals.IsStunReady)
             {
                 if (Globals.IsObjectValidWithRange(gapcloser.Target, 625))
                 {

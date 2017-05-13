@@ -35,7 +35,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
             return Hits;
         }
 
-        /* Pasta from WuAnnie */ /* TODO: Rework later, needs improvement */
         public static Dictionary<Vector2, int> GetBestUltimatePosition(Vector2 TargetPosition)
         {
             var _PositionAndHits = new Dictionary<Vector2, int>();

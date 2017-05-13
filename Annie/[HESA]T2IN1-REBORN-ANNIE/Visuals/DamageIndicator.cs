@@ -8,7 +8,7 @@ using SharpDX;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 {
-    internal static class DamageIndicator
+    internal class DamageIndicator
     {
         public static void Initialize()
         {
@@ -28,7 +28,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
         {
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawDamage").Checked && !Globals.MyHero.IsDead)
             {
-                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => e.IsEnemy && !e.IsDead && Globals.IsTargetValid(e) && e.IsVisible))
+                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => e.IsEnemy && !e.IsDead && e.IsTargetValid() && e.IsVisibleOnScreen)) /* TODO: Maybe change back to "IsVisible" if there is a drawing delay */
                 {
                     var _Damage = _TotalDamage(_Enemy);
 
@@ -44,10 +44,24 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
                     /* TODO: bugs sometimes, needs fixing */
                     var _ScreenPosition = Drawing.WorldToScreen(_Enemy.Position);
                     var _TextPosition = new Vector2(_ScreenPosition.X, _ScreenPosition.Y);
-                    var _EstimatedDamagePercent = string.Concat(Math.Ceiling((int)_Damage / _Enemy.Health * 100), "%");
+                    var _EstimatedDamage = Math.Ceiling((int) _Damage / _Enemy.Health * 100);
                     var _Text = "Estimated Damage: NaN";
-                    if (_Damage > 0) { _Text = "Estimated Damage: " + _EstimatedDamagePercent; }
-                    Drawing.DrawText(_TextPosition, new ColorBGRA(152, 219, 52, 255), _Text);
+                    var _Color = new ColorBGRA(152, 219, 52, 255);
+
+                    if (_Damage > 0)
+                    {
+                        if (_EstimatedDamage > 100)
+                        {
+                            _Text = "Is Killable";
+                            _Color = Color.Red;
+                        }
+                        else
+                        {
+                            _Text = "Estimated Damage: " + string.Concat(_EstimatedDamage, "%");
+                        }
+                    }
+
+                    Drawing.DrawText(_TextPosition, _Color, _Text);
                 }
             }
         }

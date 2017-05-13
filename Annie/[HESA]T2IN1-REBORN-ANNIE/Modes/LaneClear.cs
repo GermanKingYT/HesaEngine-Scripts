@@ -21,10 +21,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
             if (Menus.LastHitMenu.Get<MenuCheckbox>("UseQ").Checked)
             {
-                if (Globals.CanUseSpell(SpellSlot.Q))
+                if (SpellSlot.Q.CanUseSpell())
                 {
                     var _Target = Globals.GetLaneMinion(SpellsManager.Q);
-                    if (Globals.IsObjectValidWithRange(_Target, SpellsManager.Q.Range))
+                    if (_Target.IsObjectValidWithRange(SpellsManager.Q.Range))
                     {
                         Globals.DelayAction(() => SpellsManager.Q.Cast(_Target));
                     }
@@ -33,10 +33,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
             if (Menus.LaneClearMenu.Get<MenuCheckbox>("UseW").Checked)
             {
-                if (Globals.CanUseSpell(SpellSlot.W))
+                if (SpellSlot.W.CanUseSpell())
                 {
                     Vector3 _PredictionW = new Vector3();
-                    if (Globals.GetBestLocationW(GameObjectType.obj_AI_Minion, out _PredictionW) >= Menus.LaneClearMenu.Get<MenuSlider>("MinMinions").CurrentValue)
+                    if (Other.Prediction.GetBestLocationW(GameObjectType.obj_AI_Minion, out _PredictionW) >= Menus.LaneClearMenu.Get<MenuSlider>("MinMinions").CurrentValue)
                     {
                         if (_PredictionW != Vector3.Zero)
                         {

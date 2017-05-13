@@ -46,25 +46,25 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             /* TODO: OPTIMIZE */
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawPredictionR").Checked)
             {
-                if (Globals.CanUseSpell(SpellSlot.R) && !Globals.IsTibbersSpawned)
+                if (SpellSlot.R.CanUseSpell() && !Globals.IsTibbersSpawned)
                 {
                     var _Target = TargetSelector.GetTarget(SpellsManager.R.Range);
-                    if (Globals.IsTargetValidWithRange(_Target, 625))
+                    if (_Target.IsTargetValidWithRange(625))
                     {
-                        var _PositionAndHits = Globals.GetBestUltimatePosition(_Target.ServerPosition.To2D());
+                        var _PositionAndHits = Other.Prediction.GetBestUltimatePosition(_Target.ServerPosition.To2D());
                         if (_PositionAndHits.First().Value >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
                         {
                             if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked)
                             {
                                 if (Globals.IsStunReady)
                                 {
-                                    Drawing.DrawCircle(_PositionAndHits.First().Key.To3DWorld(), 70, Color.OrangeRed);
+                                    Drawing.DrawCircle(_PositionAndHits.First().Key.To3DWorld(), 150, Color.OrangeRed);
                                     Drawing.DrawLine(Globals.MyHero.Position, _PositionAndHits.First().Key.To3DWorld(), Color.OrangeRed, 2);
                                 }
                             }
                             else
                             {
-                                Drawing.DrawCircle(_PositionAndHits.First().Key.To3DWorld(), 70, Color.OrangeRed);
+                                Drawing.DrawCircle(_PositionAndHits.First().Key.To3DWorld(), 150, Color.OrangeRed);
                                 Drawing.DrawLine(Globals.MyHero.Position, _PositionAndHits.First().Key.To3DWorld(), Color.OrangeRed, 2);
                             } 
                         }
@@ -75,10 +75,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             /* TODO: OPTIMIZE */
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawPredictionW").Checked && Globals.OrbwalkerMode != Orbwalker.OrbwalkingMode.Combo)
             {
-                if (Globals.CanUseSpell(SpellSlot.W))
+                if (SpellSlot.W.CanUseSpell())
                 {
                     Vector3 _PredictionW = new Vector3();
-                    if (Globals.GetBestLocationW(GameObjectType.obj_AI_Minion, out _PredictionW) >= Menus.LaneClearMenu.Get<MenuSlider>("MinMinions").CurrentValue)
+                    if (Other.Prediction.GetBestLocationW(GameObjectType.obj_AI_Minion, out _PredictionW) >= Menus.LaneClearMenu.Get<MenuSlider>("MinMinions").CurrentValue)
                     {
                         if (_PredictionW != Vector3.Zero)
                         {
@@ -106,7 +106,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             /* TODO: OPTIMIZE */
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawBoundingRadius").Checked)
             {
-                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => e.IsEnemy && !e.IsDead && Globals.IsTargetValid(e) && e.IsVisible))
+                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisibleOnScreen))
                 {
                     Drawing.DrawCircle(_Enemy.Position, _Enemy.BoundingRadius);
                 }

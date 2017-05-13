@@ -69,15 +69,13 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Activator.cs" />
     <Compile Include="Features\Interrupt.cs" />
+    <Compile Include="Features\Killsteal.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Managers\ModeManager.cs" />
     <Compile Include="Managers\SpellsManager.cs" />
@@ -86,6 +84,7 @@
     <Compile Include="Modes\LastHit.cs" />
     <Compile Include="Modes\PermActive.cs" />
     <Compile Include="Modes\Tibbers.cs" />
+    <Compile Include="Other\Prediction.cs" />
     <Compile Include="Visuals\DamageIndicator.cs" />
     <Compile Include="Visuals\Drawings.cs" />
     <Compile Include="Visuals\Menus.cs" />

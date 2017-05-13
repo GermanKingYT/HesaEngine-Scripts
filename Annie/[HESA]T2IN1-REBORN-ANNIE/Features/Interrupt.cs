@@ -14,13 +14,13 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
 
             if (Menus.MiscMenu.Get<MenuCheckbox>("InterruptOnGapCloser").Checked && Globals.IsStunReady)
             {
-                if (Globals.IsObjectValidWithRange(gapcloser.Target, 625))
+                if (gapcloser.Target.IsObjectValidWithRange(625))
                 {
-                    if (Globals.CanUseSpell(SpellSlot.W))
+                    if (SpellSlot.W.CanUseSpell())
                     {
                         Globals.DelayAction(() => SpellsManager.W.CastOnUnit(gapcloser.Target));
                     }
-                    else if (Globals.CanUseSpell(SpellSlot.Q))
+                    else if (SpellSlot.Q.CanUseSpell())
                     {
                         Globals.DelayAction(() => SpellsManager.Q.Cast(gapcloser.Target));
                     }

@@ -20,10 +20,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
             if (Menus.LastHitMenu.Get<MenuCheckbox>("UseQ").Checked)
             {
-                if (Globals.CanUseSpell(SpellSlot.Q))
+                if (SpellSlot.Q.CanUseSpell())
                 {
                     var _Target = Globals.GetLaneMinion(SpellsManager.Q);
-                    if (Globals.IsObjectValidWithRange(_Target, SpellsManager.Q.Range))
+                    if (_Target.IsObjectValidWithRange(SpellsManager.Q.Range))
                     {
                         Globals.DelayAction(() => SpellsManager.Q.Cast(_Target));
                     }
@@ -32,10 +32,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
             if (Menus.LastHitMenu.Get<MenuCheckbox>("UseW").Checked)
             {
-                if (Globals.CanUseSpell(SpellSlot.W))
+                if (SpellSlot.W.CanUseSpell())
                 {
                     var _Target = Globals.GetLaneMinion(SpellsManager.W);
-                    if (Globals.IsObjectValidWithRange(_Target, SpellsManager.W.Range))
+                    if (_Target.IsObjectValidWithRange(SpellsManager.W.Range))
                     {
                         Globals.DelayAction(() => SpellsManager.W.Cast(_Target));
                     }

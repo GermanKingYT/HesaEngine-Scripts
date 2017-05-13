@@ -22,12 +22,18 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 
             /* Activator Section */
             ActivatorMenu = HomeMenu.AddSubMenu("> ACTIVATOR");
+            ActivatorMenu.AddSeparator("-Activate-");
+            ActivatorMenu.Add(new MenuCheckbox("EnableActivator", "Enable Activator", true));
+            ActivatorMenu.AddSeparator("-Summoners-");
+            ActivatorMenu.Add(new MenuCheckbox("AutoIgnite", "Auto use Ignite if Killable"));
+            ActivatorMenu.AddSeparator("-Pots-");
             ActivatorMenu.Add(new MenuCheckbox("AutoUsePots", "Auto use Health Pots", true));
             ActivatorMenu.Add(new MenuCheckbox("AutoUsePotsOnBuff", "Auto use Health Pots if Poisened / has Damage Buff", true));
             ActivatorMenu.Add(new MenuSlider("AutoUsePotsHealth", "Use if Health Percent is below or equal", 1, 100, 30));
 
             /* Combo Section */
             ComboMenu = HomeMenu.AddSubMenu("> COMBO");
+            ComboMenu.AddSeparator("-Combo Settings-");
             ComboMenu.Add(new MenuCheckbox("UseQ", "Use Q in Combo", true));
             ComboMenu.Add(new MenuCheckbox("UseW", "Use W in Combo", true));
             ComboMenu.Add(new MenuCheckbox("UseE", "Use E in Combo (if Stun is not ready)", true));
@@ -82,8 +88,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
 
             /* Misc Section */
             MiscMenu = HomeMenu.AddSubMenu("> MISC");
-            MiscMenu.AddSeparator("-Summoners-");
-            MiscMenu.Add(new MenuCheckbox("AutoIgnite", "Auto use Ignite if Killable"));
             MiscMenu.AddSeparator("-Killsteal-");
             MiscMenu.Add(new MenuCheckbox("KillSteal", "Auto KillSteal"));
             MiscMenu.AddSeparator("-Passive-");

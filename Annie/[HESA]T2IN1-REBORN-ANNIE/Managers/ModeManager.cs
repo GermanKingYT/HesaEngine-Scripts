@@ -7,7 +7,7 @@ using HesaEngine.SDK;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Managers
 {
-    internal static class ModeManager
+    internal class ModeManager
     {
         public static void Initialize()
         {
@@ -20,8 +20,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
             if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
                 return;
 
-            /* PERMA ACTIVE */
             PermActive.Initialize();
+
+            if (Menus.MiscMenu.Get<MenuCheckbox>("KillSteal").Checked && Globals.Orb.ActiveMode != Orbwalker.OrbwalkingMode.Combo) { Features.Killsteal.Run(); }
+            if (Menus.ActivatorMenu.Get<MenuCheckbox>("EnableActivator").Checked) { Features.Activator.Run(); }
 
             switch (Globals.OrbwalkerMode)
             {

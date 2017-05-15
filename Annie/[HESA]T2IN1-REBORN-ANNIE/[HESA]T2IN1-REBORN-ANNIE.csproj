@@ -76,6 +76,7 @@
     <Compile Include="Features\Activator.cs" />
     <Compile Include="Features\Interrupt.cs" />
     <Compile Include="Features\Killsteal.cs" />
+    <Compile Include="Features\Updater.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Managers\ModeManager.cs" />
     <Compile Include="Managers\SpellsManager.cs" />

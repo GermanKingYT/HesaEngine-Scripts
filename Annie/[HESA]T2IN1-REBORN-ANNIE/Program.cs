@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Net;
-using System.Xml;
 
 using _HESA_T2IN1_REBORN_ANNIE;
 using _HESA_T2IN1_REBORN_ANNIE.Managers;
 using _HESA_T2IN1_REBORN_ANNIE.Visuals;
+using _HESA_T2IN1_REBORN_ANNIE.Features;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
@@ -14,10 +13,8 @@ namespace _HESA_T2IN1_REBORN
     public class Program : IScript
     {
         public string Name => "[T2IN1-REBORN] Annie";
-        public string Version => "1.2.0";
+        public string Version => "1.3.0";
         public string Author => "RaINi";
-
-        private static string _CachedXML = string.Empty;
 
         public void OnInitialize()
         {
@@ -49,19 +46,26 @@ namespace _HESA_T2IN1_REBORN
         {
             if (Globals.MyHero.Hero.Equals(Champion.Annie))
             {
-                if (_HasInternet())
+                switch (Updater.Run(Name, Version))
                 {
-                    _CacheXML("https://raw.githubusercontent.com/LeagueRaINi/HesaEngine-Scripts/master/Versions.xml");
-                    if (_CachedXML != string.Empty)
-                    {
-                        Chat.Print(_NeedsUpdate(Name, Version)
-                            ? "<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>A New Update is available!"
-                            : "<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>No Update found");
-                    }
-                }
-                else
-                {
-                    Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Could not check for Updates");
+                    case "NoUpdate":
+                        Chat.Print("<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>No update found");
+                        break;
+                    case "Failed":
+                        Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Could not check for updates");
+                        break;
+                    case "NewVersion":
+                        Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>A new update is available");
+                        break;
+                    case "Updated":
+                        Chat.Print("<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>Download complete, reload the script to load the new version");
+                        break;
+                    case "DownloadFailed":
+                        Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Download failed");
+                        break;
+                    default:
+                        Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Could not check for updates");
+                        break;
                 }
 
                 LoadScript();
@@ -69,51 +73,6 @@ namespace _HESA_T2IN1_REBORN
             else
             {
                 Chat.Print("<font color='#e74c3c'>[T2IN1-REBORN] </font> Champion: " + ObjectManager.Player.ChampionName + " is not Supported!");
-            }
-        }
-
-        private static void _CacheXML(string Link)
-        {
-            using (var _WebClient = new WebClient())
-            {
-                _CachedXML = _WebClient.DownloadString(Link);
-            }
-        }
-
-        private static bool _NeedsUpdate(string Name, string Version)
-        {
-            var _Document = new XmlDocument();
-            _Document.LoadXml(_CachedXML);
-
-            var _Names = _Document.DocumentElement.SelectSingleNode("/T2IN1_UPDATER/SCRIPTS");
-            foreach (XmlNode _Node in _Names)
-            {
-                if (_Node.Attributes.GetNamedItem("VALUE").InnerText.Equals(Name))
-                {
-                    if (Version.Equals(_Node.ChildNodes[0].InnerText))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        public static bool _HasInternet()
-        {
-            try
-            {
-                using (var _Client = new WebClient())
-                {
-                    using (var _Stream = _Client.OpenRead("http://www.google.com"))
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch
-            {
-                return false;
             }
         }
     }

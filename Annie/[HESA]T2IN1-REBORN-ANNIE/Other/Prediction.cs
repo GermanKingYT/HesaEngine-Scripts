@@ -16,29 +16,18 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
         private static List<Vector3> _GetEnemiePositions()
         {
-            List<Vector3> Positions = new List<Vector3>();
-            foreach (AIHeroClient Hero in ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisible &&  e.IsValidTarget() && Globals.MyHero.Distance(e) <= 1200))
-            {
-                Positions.Add(HesaEngine.SDK.Prediction.GetPrediction(Hero, 500).UnitPosition);
-            }
-            return Positions;
+            return ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisible && e.IsValidTarget() && Globals.MyHero.Distance(e) <= 1200).Select(Hero => HesaEngine.SDK.Prediction.GetPrediction(Hero, 500).UnitPosition).ToList();
         }
 
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
         private static int _CountUltimateHits(Vector2 CastPosition)
         {
-            int Hits = new int();
-            foreach (Vector2 EnemyPos in _GetEnemiePositions().To2D())
-            {
-                if (CastPosition.Distance(EnemyPos) <= 250) Hits += 1;
-            }
-            return Hits;
+            return _GetEnemiePositions().To2D().Count(EnemyPos => CastPosition.Distance(EnemyPos) <= 250);
         }
 
         /* Pasta from WuAnnie */ /* TODO: Rework later, needs improvement */
         public static Dictionary<Vector2, int> GetBestUltimatePosition(Vector2 TargetPosition)
         {
-            var _PositionAndHits = new Dictionary<Vector2, int>();
             var _UltimatePosition = new List<Vector2>
             {
                 new Vector2(TargetPosition.X - 250, TargetPosition.Y + 100),
@@ -90,11 +79,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
                 new Vector2(TargetPosition.X + 250, TargetPosition.Y + 100)
             };
 
-            foreach (Vector2 _Position in _UltimatePosition)
-            {
-                _PositionAndHits.Add(_Position, _CountUltimateHits(_Position));
-            }
-
+            var _PositionAndHits = _UltimatePosition.ToDictionary(_Position => _Position, _CountUltimateHits);
             Vector2 _PosToGG = _PositionAndHits.First(pos => pos.Value == _PositionAndHits.Values.Max()).Key;
             int _Hits = _PositionAndHits.First(pos => pos.Key == _PosToGG).Value;
             return new Dictionary<Vector2, int> { { _PosToGG, _Hits } };

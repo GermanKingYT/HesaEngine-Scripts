@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Xml;
 
 using HesaEngine.SDK;
@@ -28,13 +29,13 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
                 return "Failed";
             }
 
-            if (!_NeedsUpdate(Name, Version) && _DownloadLink != string.Empty)
+            if (!_NeedsUpdate(Name, Version))
             {
                 return "NoUpdate";
             }
 
             string _Temp = _FoundScript();
-            if (_Temp.Equals(string.Empty))
+            if (_Temp.Equals(string.Empty) || _DownloadLink.Equals(string.Empty))
             {
                 return "NewVersion";
             }
@@ -48,21 +49,16 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
             return new FileInfo(_Temp).Length > 0 ? "Updated" : "DownloadFailed";
         }
 
+
+
         private static string _FoundScript()
         {
-            foreach (ProcessModule _pModule in Process.GetCurrentProcess().Modules)
+            foreach (var _Script in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path)), "Scripts"), "*.dll*", SearchOption.AllDirectories).ToList())
             {
-                string _Temp = _pModule.FileName;
-                if (_Temp.Contains("HesaEngine.Loader.dll"))
+                FileVersionInfo _FileInformation = FileVersionInfo.GetVersionInfo(_Script);
+                if (_FileInformation.OriginalFilename.Equals("[HESA]T2IN1-REBORN-ANNIE.dll"))
                 {
-                    foreach (var _Script in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(_Temp), "Scripts"), "*.dll*", SearchOption.AllDirectories).ToList())
-                    {
-                        FileVersionInfo _FileInformation = FileVersionInfo.GetVersionInfo(_Script);
-                        if (_FileInformation.OriginalFilename.Equals("[HESA]T2IN1-REBORN-ANNIE.dll"))
-                        {
-                            return _Script;
-                        }
-                    }
+                    return _Script;
                 }
             }
             return string.Empty;
@@ -86,7 +82,8 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
             {
                 if (_Node.Attributes.GetNamedItem("VALUE").InnerText.Equals(Name))
                 {
-                    if (Version.Equals(_Node.ChildNodes[0].InnerText))
+                    var _CurrentVersion = new System.Version(Version); var _DatabaseVersion = new System.Version(_Node.ChildNodes[0].InnerText);
+                    if (_CurrentVersion.CompareTo(_DatabaseVersion) >= 0)
                     {
                         return false;
                     }

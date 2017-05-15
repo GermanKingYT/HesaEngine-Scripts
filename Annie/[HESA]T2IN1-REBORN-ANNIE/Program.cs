@@ -13,7 +13,7 @@ namespace _HESA_T2IN1_REBORN
     public class Program : IScript
     {
         public string Name => "[T2IN1-REBORN] Annie";
-        public string Version => "1.3.0";
+        public string Version => "1.4.0";
         public string Author => "RaINi";
 
         public void OnInitialize()
@@ -39,7 +39,7 @@ namespace _HESA_T2IN1_REBORN
                 Logger.Log("Error: " + _Exception, ConsoleColor.Red);
             }
 
-            Chat.Print("<font color='#27ae60'>[T2IN1-REBORN] </font>Script is ready to use");
+            Chat.Print("<font color='#27ae60'>[T2IN1-REBORN] </font>Script is fully initialized");
         }
 
         private void Game_OnGameLoaded()
@@ -58,7 +58,7 @@ namespace _HESA_T2IN1_REBORN
                         Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>A new update is available");
                         break;
                     case "Updated":
-                        Chat.Print("<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>Download complete, reload the script to load the new version");
+                        Chat.Print("<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>Reload the script to use the new version");
                         break;
                     case "DownloadFailed":
                         Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Download failed");

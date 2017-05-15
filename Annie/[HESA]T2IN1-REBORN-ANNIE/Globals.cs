@@ -34,24 +34,30 @@ namespace _HESA_T2IN1_REBORN_ANNIE
         public static bool IsTibbersSpawned { get; set; }
         public static bool IsStunReady => MyHero.HasBuff("pyromania_particle");
 
+        private static float _MinionHealthPrediction(this Obj_AI_Base minion, Spell daSpell) => MinionHealthPrediction.GetHealthPrediction(minion, Game.GameTimeTickCount, (int)Math.Ceiling(daSpell.Delay));
         private static Obj_AI_Base _LastMinion { get; set; }
         public static Obj_AI_Base GetLaneMinion(Spell daSpell)
         {
-            var _Minions = MinionManager.GetMinions(daSpell.Range).OrderBy(x => x.Health);
+            var _Minions = MinionManager.GetMinions(daSpell.Range).Where(x => x.IsObjectValidWithRange(625) && !x.IsDead).OrderBy(x => x.Health);
             if (!_Minions.IsEmpty())
             {
                 var _Temp = _Minions.FirstOrDefault();
-                if (_Temp != null && _Temp.IsValidTarget(daSpell.Range) && !_Temp.IsDead)
+                if (_Temp.Equals(_LastMinion))
                 {
-                    if (_Temp.Equals(_LastMinion))
-                    {
-                        if (_Minions.Count() > 1) { _Temp = _Minions.Skip(1).First(); } else { return null; }
-                    }
+                    if (_Minions.Count() > 1) { _Temp = _Minions.Skip(1).First(); } else { return null; }
+                }
 
-                    if (daSpell.GetDamage(_Temp) >= MinionHealthPrediction.GetHealthPrediction(_Temp, Game.GameTimeTickCount, (int)Math.Ceiling(daSpell.Delay)))
+                if (MyHero.CanAttack && MyHero.GetAutoAttackDamage(_Temp) >= _MinionHealthPrediction(_Temp, daSpell))
+                {
+                    _Temp = _Minions.Skip(1).FirstOrDefault();
+                    if (daSpell.GetDamage(_Temp) >= _MinionHealthPrediction(_Temp, daSpell))
                     {
                         _LastMinion = _Temp; return _Temp;
                     }
+                }
+                else if (daSpell.GetDamage(_Temp) >= _MinionHealthPrediction(_Temp, daSpell))
+                {
+                    _LastMinion = _Temp; return _Temp;
                 }
             }
             return null;

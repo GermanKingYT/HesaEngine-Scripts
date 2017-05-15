@@ -36,13 +36,13 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
             _TargetW = TargetSelector.GetTarget(SpellsManager.W.Range);
             _TargetR = TargetSelector.GetTarget(SpellsManager.R.Range);
 
-            if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked)
+            if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked && Globals.MyHero.CountEnemiesInRange(1000) > 0)
             {
                 if (SpellSlot.E.CanUseSpell())
                 {
                     if (!Globals.IsStunReady)
                     {
-                        SpellsManager.E.Cast();
+                        Globals.DelayAction(() => SpellsManager.E.Cast());
                     }
                 }
             }

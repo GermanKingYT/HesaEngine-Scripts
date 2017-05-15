@@ -1,7 +1,8 @@
 <T2IN1_UPDATER>
   <SCRIPTS>
     <NAME VALUE="[T2IN1-REBORN] Annie">
-      <VERSION>1.2.0</VERSION>
+      <VERSION>1.3.0</VERSION>
+      <DOWNLOAD>https://github.com/LeagueRaINi/HesaEngine-Scripts/raw/master/Compiled/Annie/%5BT2IN1-REBORN%5D-Annie.dll</DOWNLOAD>
     </NAME>
   </SCRIPTS>
 </T2IN1_UPDATER>

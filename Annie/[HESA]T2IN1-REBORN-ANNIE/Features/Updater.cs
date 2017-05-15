@@ -23,7 +23,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
 
             _CacheXML("https://raw.githubusercontent.com/LeagueRaINi/HesaEngine-Scripts/master/Versions.xml");
 
-            if (_CachedXML == string.Empty)
+            if (_CachedXML.Equals(string.Empty))
             {
                 return "Failed";
             }

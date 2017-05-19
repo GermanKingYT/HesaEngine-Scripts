@@ -23,7 +23,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 if (SpellSlot.Q.CanUseSpell())
                 {
                     var _Target = Globals.GetLaneMinion(SpellsManager.Q);
-                    if (_Target.IsObjectValidWithRange(SpellsManager.Q.Range))
+                    if (_Target.IsValidTarget(SpellsManager.Q.Range))
                     {
                         Globals.DelayAction(() => SpellsManager.Q.Cast(_Target));
                     }
@@ -35,7 +35,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 if (SpellSlot.W.CanUseSpell())
                 {
                     var _Target = Globals.GetLaneMinion(SpellsManager.W);
-                    if (_Target.IsObjectValidWithRange(SpellsManager.W.Range))
+                    if (_Target.IsValidTarget(SpellsManager.W.Range))
                     {
                         Globals.DelayAction(() => SpellsManager.W.Cast(_Target));
                     }

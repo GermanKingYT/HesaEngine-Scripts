@@ -16,7 +16,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
         public static void TibbersMethod()
         {
-            Globals.Tibbers = ObjectManager.MinionsAndMonsters.Ally.FirstOrDefault(x => x.Name.ToLower().Contains("tibbers"));
             if (Globals.Tibbers.IsValid())
             {
                 switch (Menus.ComboMenu.Get<MenuCombo>("ControlMethodTibbers").CurrentValue)

@@ -16,7 +16,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
         private static List<Vector3> _GetEnemiePositions()
         {
-            return ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisible && e.IsValidTarget() && Globals.MyHero.Distance(e) <= 1200).Select(Hero => HesaEngine.SDK.Prediction.GetPrediction(Hero, 500).UnitPosition).ToList();
+            return ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisible && e.IsValidTarget() && Globals.MyHero.Distance(e) <= 1200).Select(Hero => new HesaEngine.SDK.Prediction().GetPrediction(Hero, 500).UnitPosition).ToList();
         }
 
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */

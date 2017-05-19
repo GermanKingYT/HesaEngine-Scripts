@@ -49,7 +49,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
                 if (SpellSlot.R.CanUseSpell() && !Globals.IsTibbersSpawned)
                 {
                     var _Target = TargetSelector.GetTarget(SpellsManager.R.Range);
-                    if (_Target.IsTargetValidWithRange(625))
+                    if (_Target.IsValidTarget(625))
                     {
                         var _PositionAndHits = Other.Prediction.GetBestUltimatePosition(_Target.ServerPosition.To2D());
                         if (_PositionAndHits.First().Value >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)

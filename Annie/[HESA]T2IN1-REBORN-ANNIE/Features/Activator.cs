@@ -19,7 +19,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
                 {
                     var _Spell = new Spell(_Slot, 600); _Spell.SetTargetted(0, int.MaxValue);
                     var _Enemy = ObjectManager.Heroes.Enemies.FirstOrDefault(e => Globals.MyHero.GetSummonerSpellDamage(e, Damage.SummonerSpell.Ignite) >= e.Health + 28);
-                    if (_Enemy.IsTargetValidWithRange(600))
+                    if (_Enemy.IsValidTarget(600))
                     {
                         Globals.DelayAction(() => _Spell.Cast(_Enemy));
                     }

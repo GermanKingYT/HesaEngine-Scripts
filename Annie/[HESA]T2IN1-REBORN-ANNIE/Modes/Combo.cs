@@ -51,7 +51,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
             {
                 if (Globals.IsStunReady)
                 {
-                    if (_TargetR.IsTargetValidWithRange(SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
+                    if (_TargetR.IsValidTarget(SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
                     {
                         _PredictionR = Other.Prediction.GetBestUltimatePosition(_TargetR.ServerPosition.To2D());
                         if (_PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
@@ -69,7 +69,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.Q.CanUseSpell() && !Globals.IsStunReady)
                     {
-                        if (_TargetQ.IsTargetValidWithRange(SpellsManager.Q.Range))
+                        if (_TargetQ.IsValidTarget(SpellsManager.Q.Range))
                         {
                             Globals.DelayAction(() => SpellsManager.Q.Cast(_TargetQ));
                         }
@@ -80,7 +80,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.W.CanUseSpell() && !Globals.IsStunReady)
                     {
-                        if (_TargetW.IsTargetValidWithRange(SpellsManager.W.Range))
+                        if (_TargetW.IsValidTarget(SpellsManager.W.Range))
                         {
                             Globals.DelayAction(() => SpellsManager.W.CastOnUnit(_TargetW));
                         }
@@ -93,7 +93,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.R.CanUseSpell())
                     {
-                        if (_TargetR.IsTargetValidWithRange(SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
+                        if (_TargetR.IsValidTarget(SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
                         {
                             _PredictionR = Other.Prediction.GetBestUltimatePosition(_TargetR.ServerPosition.To2D());
                             if (_PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
@@ -112,7 +112,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.Q.CanUseSpell())
                     {
-                        if (_TargetQ.IsTargetValidWithRange(SpellsManager.Q.Range))
+                        if (_TargetQ.IsValidTarget(SpellsManager.Q.Range))
                         {
                             Globals.DelayAction(() => SpellsManager.Q.Cast(_TargetQ));
                         }
@@ -123,7 +123,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.W.CanUseSpell())
                     {
-                        if (_TargetW.IsTargetValidWithRange(SpellsManager.W.Range))
+                        if (_TargetW.IsValidTarget(SpellsManager.W.Range))
                         {
                             Globals.DelayAction(() => SpellsManager.W.CastOnUnit(_TargetW));
                         }

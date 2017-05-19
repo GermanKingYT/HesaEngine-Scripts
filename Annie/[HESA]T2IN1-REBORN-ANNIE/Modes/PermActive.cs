@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using _HESA_T2IN1_REBORN_ANNIE.Managers;
+﻿using _HESA_T2IN1_REBORN_ANNIE.Managers;
 using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
@@ -13,12 +11,11 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
         public static void Initialize()
         {
             /* Tibbers Auto Control */
-            Globals.IsTibbersSpawned = Globals.MyHero.GetSpell(SpellSlot.R).SpellData.Name.Equals("InfernalGuardianGuide");
             if (Globals.IsTibbersSpawned)
             {
                 if (Menus.ComboMenu.Get<MenuCheckbox>("AutoControl").Checked)
                 {
-                    Modes.Tibbers.TibbersMethod();
+                    Tibbers.TibbersMethod();
                 }
             }
 

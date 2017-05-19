@@ -14,7 +14,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
 
             if (Menus.MiscMenu.Get<MenuCheckbox>("InterruptOnGapCloser").Checked && Globals.IsStunReady)
             {
-                if (gapcloser.Target.IsObjectValidWithRange(625))
+                if (gapcloser.Target.IsValidTarget(625))
                 {
                     if (SpellSlot.W.CanUseSpell())
                     {

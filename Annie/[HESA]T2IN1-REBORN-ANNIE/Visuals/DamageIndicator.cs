@@ -28,7 +28,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
         {
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawDamage").Checked && !Globals.MyHero.IsDead)
             {
-                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => e.IsEnemy && !e.IsDead && e.IsTargetValid() && e.IsVisibleOnScreen)) /* TODO: Maybe change back to "IsVisible" if there is a drawing delay */
+                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => e.IsEnemy && !e.IsDead && e.IsValidTarget() && e.IsVisibleOnScreen)) /* TODO: Maybe change back to "IsVisible" if there is a drawing delay */
                 {
                     var _Damage = _TotalDamage(_Enemy);
 

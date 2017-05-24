@@ -1,6 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
+
 using _HESA_T2IN1_REBORN_ANNIE;
 using _HESA_T2IN1_REBORN_ANNIE.Managers;
 using _HESA_T2IN1_REBORN_ANNIE.Visuals;
@@ -14,7 +13,7 @@ namespace _HESA_T2IN1_REBORN
     public class Program : IScript
     {
         public string Name => "[T2IN1-REBORN] Annie";
-        public string Version => "1.4.0";
+        public string Version => "1.4.2";
         public string Author => "RaINi";
 
         public void OnInitialize()

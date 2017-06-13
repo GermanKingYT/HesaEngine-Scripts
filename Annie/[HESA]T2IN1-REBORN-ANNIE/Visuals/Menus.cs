@@ -96,12 +96,12 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             MiscMenu.Add(new MenuCheckbox("InterruptOnGapCloser", "Interrupt Enemy GapCloser with Stun", true));
             MiscMenu.Add(new MenuCheckbox("InterruptPassive", "Use Passive to Interrupt Enemy"));
             MiscMenu.Add(new MenuCheckbox("InterruptR", "Use R to Interrupt Enemy")); TODO: IMPLEMENT */
-            MiscMenu.AddSeparator("-Auto Leveler-");
+            /* MiscMenu.AddSeparator("-Auto Leveler-");
             MiscMenu.Add(new MenuCheckbox("AutoLevel", "Enable Auto Leveler"));
             MiscMenu.Add(new MenuCombo("AutoLevelFirstFocus", "1 Spell to Focus", new[] { "Q", "W", "E" }));
             MiscMenu.Add(new MenuCombo("AutoLevelSecondFocus", "2 Spell to Focus", new[] { "Q", "W", "E" }));
             MiscMenu.Add(new MenuCombo("AutoLevelThirdFocus", "3 Spell to Focus", new[] { "Q", "W", "E" }));
-            MiscMenu.Add(new MenuSlider("AutoLevelDelaySlider", "Delay Slider", 200, 150, 500));
+            MiscMenu.Add(new MenuSlider("AutoLevelDelaySlider", "Delay Slider", 200, 150, 500)); */
 
             Logger.Log(">> Executed", ConsoleColor.Green);
         }

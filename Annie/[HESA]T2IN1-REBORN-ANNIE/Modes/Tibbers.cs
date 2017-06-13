@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 
-using _HESA_T2IN1_REBORN_ANNIE.Managers;
 using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
@@ -12,7 +11,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 {
     internal class Tibbers
     {
-        private static readonly bool _AttackUnderTurret = !Menus.ComboMenu.Get<MenuCheckbox>("DontAttackIfUnderTurret").Checked;
+        private static readonly bool AttackUnderTurret = !Menus.ComboMenu.Get<MenuCheckbox>("DontAttackIfUnderTurret").Checked;
 
         public static void TibbersMethod()
         {
@@ -21,107 +20,120 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 switch (Menus.ComboMenu.Get<MenuCombo>("ControlMethodTibbers").CurrentValue)
                 {
                     case 1:
-                        _MethodHealth();
+                        MethodHealth();
                         break;
                     case 2:
-                        _MethodNearest();
+                        MethodNearest();
                         break;
                     case 3:
-                        _MethodSelected();
+                        MethodSelected();
                         break;
                     default:
-                        _MethodHealth();
+                        MethodHealth();
                         break;
                 }
             }
         }
 
-        private static void _MethodHealth()
+        /* TODO: UNFINISHED */
+        private static void MethodMinion()
         {
-            var _Target = ObjectManager.Heroes.Enemies.OrderBy(x => x.Health);
-            if (!_Target.IsEmpty())
-            {
-                var _Sorted = _Target.Where(y => y.ObjectType == GameObjectType.AIHeroClient);
-                var _Heroes = _Sorted as IList<AIHeroClient> ?? _Sorted.ToList();
-                if (_Heroes.IsEmpty()) return;
+            List<Obj_AI_Minion> _Minions = MinionManager.GetMinions(2000, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.Health);
+            if (_Minions.IsEmpty())
+                return;
 
-                var _Temp = _Heroes.FirstOrDefault();
-                if (_Temp != null)
-                {
-                    if (_Temp.IsValidTarget(1500 /* TODO: Placeholder Value */) && !_Temp.IsDead)
-                    {
-                        if (_AttackUnderTurret && !_Temp.IsUnderEnemyTurret())
-                        {
-                            /* TODO: Till "AutoAttackPet" is Fixed */
-                            Globals.DelayAction(() => SpellsManager.R.CastOnUnit(_Temp));
-                            /* Functions.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Sorted.FirstOrDefault()); */
-                        }
-                        else
-                        {
-                            /* TODO: Till "AutoAttackPet" is Fixed */
-                            Globals.DelayAction(() => SpellsManager.R.CastOnUnit(_Temp));
-                            /* Functions.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Sorted.FirstOrDefault()); */
-                        }
-                    }
-                }
+            Obj_AI_Minion _Target = _Minions.FirstOrDefault();
+            if (!_Target.IsValid())
+                return;
+
+            if (Globals.MyHero.IsUnderEnemyTurret())
+            {
+                Obj_AI_Turret _Turret = ObjectManager.Turrets.Enemy.MinOrDefault(x => x.Distance(Globals.MyHero));
+                Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Target);
+            }
+            else
+            {
+                Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Target);
             }
         }
 
-        private static void _MethodNearest()
+        private static void MethodHealth()
         {
-            var _Target = ObjectManager.Heroes.Enemies.OrderBy(x => x.Distance(Globals.MyHero));
-            if (!_Target.IsEmpty())
-            {
-                var _Sorted = _Target.Where(y => y.ObjectType == GameObjectType.AIHeroClient);
-                var _Heroes = _Sorted as IList<AIHeroClient> ?? _Sorted.ToList();
-                if (_Heroes.IsEmpty()) return;
+            if (Globals.MyHero.GetEnemiesInRange(2000).Count() == 0) { MethodMinion(); return; }
 
-                var _Temp = _Heroes.FirstOrDefault();
-                if (_Temp != null)
+            AIHeroClient _Target = ObjectManager.Heroes.Enemies.OrderBy(x => x.Health).FirstOrDefault();
+            if (!_Target.IsValidTarget(2000))
+                return;
+
+            if (AttackUnderTurret)
+            {
+                if (!_Target.IsUnderEnemyTurret())
                 {
-                    if (_Temp.IsValidTarget(1500 /* TODO: Placeholder Value */) && !_Temp.IsDead)
-                    {
-                        if (_AttackUnderTurret && !_Temp.IsUnderEnemyTurret())
-                        {
-                            /* TODO: Till "AutoAttackPet" is Fixed */
-                            Globals.DelayAction(() => SpellsManager.R.CastOnUnit(_Temp));
-                            /* Functions.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Sorted.FirstOrDefault()); */
-                        }
-                        else
-                        {
-                            /* TODO: Till "AutoAttackPet" is Fixed */
-                            Globals.DelayAction(() => SpellsManager.R.CastOnUnit(_Temp));
-                            /* Functions.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Sorted.FirstOrDefault()); */
-                        }
-                    }
+                    Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Target);
                 }
+                else
+                {
+                    Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, Globals.MyHero);
+                }
+            }
+            else
+            {
+                Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Target);
             }
         }
 
-        private static void _MethodSelected()
+        private static void MethodNearest()
         {
-            var _Target = TargetSelector.SelectedTarget;
-            if (_Target.IsValidTarget(1500 /* TODO: Placeholder Value */) && !_Target.IsDead)
+            if (Globals.MyHero.GetEnemiesInRange(2000).Count() == 0) { MethodMinion(); return; }
+
+            AIHeroClient _Target = ObjectManager.Heroes.Enemies.OrderBy(x => x.Distance(Globals.MyHero)).FirstOrDefault();
+            if (_Target.IsValidTarget(2000))
+                return;
+
+            if (AttackUnderTurret)
+            {
+                if (!_Target.IsUnderEnemyTurret())
+                {
+                    Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Target);
+                }
+                else
+                {
+                    Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, Globals.MyHero);
+                }
+            }
+            else
+            {
+                Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, _Target);
+            }
+        }
+
+        private static void MethodSelected()
+        {
+            AIHeroClient _Target = TargetSelector.SelectedTarget;
+            if (_Target.IsValidTarget(2000))
             {
                 if (Globals.Tibbers.CanAttack)
                 {
-                    if (_AttackUnderTurret && !_Target.IsUnderEnemyTurret())
+                    if (AttackUnderTurret)
                     {
-                        /* TODO: Till "AutoAttackPet" is Fixed */
-                        Globals.DelayAction(() => SpellsManager.R.CastOnUnit(_Target));
-                        /* Functions.MyHero.IssueOrder(GameObjectOrder.MovePet, _Target); */
+                        if (!_Target.IsUnderEnemyTurret())
+                        {
+                            Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, _Target);
+                        }
+                        else
+                        {
+                            Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, Globals.MyHero);
+                        }
                     }
                     else
                     {
-                        /* TODO: Till "AutoAttackPet" is Fixed */
-                        Globals.DelayAction(() => SpellsManager.R.CastOnUnit(_Target));
-                        /* Functions.MyHero.IssueOrder(GameObjectOrder.MovePet, _Target); */
+                        Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, _Target);
                     }
                 }
             }
             else
             {
-                _MethodNearest();
+                MethodNearest();
             }
         }
     }

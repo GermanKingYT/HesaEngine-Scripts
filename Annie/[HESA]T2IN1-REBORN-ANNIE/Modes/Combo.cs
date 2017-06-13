@@ -13,28 +13,28 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 {
     internal class Combo
     {
-        private static AIHeroClient _TargetQ;
-        private static AIHeroClient _TargetW;
-        private static AIHeroClient _TargetR;
+        private static AIHeroClient TargetQ;
+        private static AIHeroClient TargetW;
+        private static AIHeroClient TargetR;
 
-        private static Dictionary<Vector2, int> _PredictionR;
-        private static Vector3 _PredictedRPosition;
+        private static Dictionary<Vector2, int> PredictionR;
+        private static Vector3 PredictedRPosition;
 
         public static void Run()
         {
-            _ComboManager();
+            ComboManager();
         }
 
-        private static void _ComboManager()
+        private static void ComboManager()
         {
-            _Combo();
+            DoCombo();
         }
 
-        private static void _Combo()
+        private static void DoCombo()
         {
-            _TargetQ = TargetSelector.GetTarget(SpellsManager.Q.Range);
-            _TargetW = TargetSelector.GetTarget(SpellsManager.W.Range);
-            _TargetR = TargetSelector.GetTarget(SpellsManager.R.Range);
+            TargetQ = TargetSelector.GetTarget(SpellsManager.Q.Range);
+            TargetW = TargetSelector.GetTarget(SpellsManager.W.Range);
+            TargetR = TargetSelector.GetTarget(SpellsManager.R.Range);
 
             if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked && Globals.MyHero.CountEnemiesInRange(1000) > 0)
             {
@@ -47,61 +47,61 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 }
             }
 
-            if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked && SpellSlot.R.CanUseSpell())
+            if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked && SpellSlot.R.CanUseSpell() && !Globals.IsTibbersSpawned)
             {
                 if (Globals.IsStunReady)
                 {
-                    if (_TargetR.IsValidTarget(SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
+                    if (TargetR.IsValidTarget(SpellsManager.R.Range))
                     {
-                        _PredictionR = Other.Prediction.GetBestUltimatePosition(_TargetR.ServerPosition.To2D());
-                        if (_PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
+                        PredictionR = Other.Prediction.GetBestUltimatePosition(TargetR.ServerPosition.To2D());
+                        if (PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
                         {
-                            _PredictedRPosition = _PredictionR.Keys.First().To3D();
-                            if (_PredictedRPosition != Vector3.Zero)
+                            PredictedRPosition = PredictionR.Keys.First().To3D();
+                            if (PredictedRPosition != Vector3.Zero)
                             {
-                                SpellsManager.R.Cast(_PredictedRPosition);
+                                SpellsManager.R.Cast(PredictedRPosition);
                             }
                         }
                     }
                 }
 
-                if (Menus.ComboMenu.Get<MenuCheckbox>("UseQ").Checked)
+                if (Menus.ComboMenu.Get<MenuCheckbox>("UseQ").Checked && !Globals.IsStunReady)
                 {
-                    if (SpellSlot.Q.CanUseSpell() && !Globals.IsStunReady)
+                    if (SpellSlot.Q.CanUseSpell())
                     {
-                        if (_TargetQ.IsValidTarget(SpellsManager.Q.Range))
+                        if (TargetQ.IsValidTarget(SpellsManager.Q.Range))
                         {
-                            Globals.DelayAction(() => SpellsManager.Q.Cast(_TargetQ));
+                            Globals.DelayAction(() => SpellsManager.Q.Cast(TargetQ));
                         }
                     }
                 }
 
-                if (Menus.ComboMenu.Get<MenuCheckbox>("UseW").Checked)
+                if (Menus.ComboMenu.Get<MenuCheckbox>("UseW").Checked && !Globals.IsStunReady)
                 {
-                    if (SpellSlot.W.CanUseSpell() && !Globals.IsStunReady)
+                    if (SpellSlot.W.CanUseSpell())
                     {
-                        if (_TargetW.IsValidTarget(SpellsManager.W.Range))
+                        if (TargetW.IsValidTarget(SpellsManager.W.Range))
                         {
-                            Globals.DelayAction(() => SpellsManager.W.CastOnUnit(_TargetW));
+                            Globals.DelayAction(() => SpellsManager.W.CastOnUnit(TargetW));
                         }
                     }
                 }
             }
             else
             {
-                if (Menus.ComboMenu.Get<MenuCheckbox>("UseR").Checked)
+                if (Menus.ComboMenu.Get<MenuCheckbox>("UseR").Checked && !Globals.IsTibbersSpawned)
                 {
                     if (SpellSlot.R.CanUseSpell())
                     {
-                        if (_TargetR.IsValidTarget(SpellsManager.R.Range) && !Globals.IsTibbersSpawned)
+                        if (TargetR.IsValidTarget(SpellsManager.R.Range))
                         {
-                            _PredictionR = Other.Prediction.GetBestUltimatePosition(_TargetR.ServerPosition.To2D());
-                            if (_PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
+                            PredictionR = Other.Prediction.GetBestUltimatePosition(TargetR.ServerPosition.To2D());
+                            if (PredictionR.Values.First() >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
                             {
-                                _PredictedRPosition = _PredictionR.Keys.First().To3D();
-                                if (_PredictedRPosition != Vector3.Zero)
+                                PredictedRPosition = PredictionR.Keys.First().To3D();
+                                if (PredictedRPosition != Vector3.Zero)
                                 {
-                                    SpellsManager.R.Cast(_PredictedRPosition);
+                                    SpellsManager.R.Cast(PredictedRPosition);
                                 }
                             }
                         }
@@ -112,9 +112,9 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.Q.CanUseSpell())
                     {
-                        if (_TargetQ.IsValidTarget(SpellsManager.Q.Range))
+                        if (TargetQ.IsValidTarget(SpellsManager.Q.Range))
                         {
-                            Globals.DelayAction(() => SpellsManager.Q.Cast(_TargetQ));
+                            Globals.DelayAction(() => SpellsManager.Q.Cast(TargetQ));
                         }
                     }
                 }
@@ -123,9 +123,9 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 {
                     if (SpellSlot.W.CanUseSpell())
                     {
-                        if (_TargetW.IsValidTarget(SpellsManager.W.Range))
+                        if (TargetW.IsValidTarget(SpellsManager.W.Range))
                         {
-                            Globals.DelayAction(() => SpellsManager.W.CastOnUnit(_TargetW));
+                            Globals.DelayAction(() => SpellsManager.W.CastOnUnit(TargetW));
                         }
                     }
                 }  

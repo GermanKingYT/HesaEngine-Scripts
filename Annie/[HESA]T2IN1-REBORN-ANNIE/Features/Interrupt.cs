@@ -8,7 +8,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
 {
     internal class Interrupt
     {
-        public static void _OnEnemyGapCloser(ActiveGapcloser gapcloser)
+        public static void OnEnemyGapCloser(ActiveGapcloser gapcloser)
         {
             Logger.Log(gapcloser.Sender.IsMe ? "It's me?" : "It's him?");
 
@@ -30,7 +30,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
 
         public static void Initialize()
         {
-            AntiGapcloser.OnEnemyGapcloser += _OnEnemyGapCloser;
+            AntiGapcloser.OnEnemyGapcloser += OnEnemyGapCloser;
         }
     }
 }

@@ -1,105 +1,71 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Xml;
-
-using HesaEngine.SDK;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Other
 {
     internal class Updater
     {
-        private static string _DownloadLink = string.Empty;
-        private static string _CachedXML = string.Empty;
+        private static string DownloadLink = string.Empty;
+        private static string CachedXML = string.Empty;
 
         public static string Run(string Name, string Version)
         {
-            if (!_HasInternet())
+            if (!HasInternet())
             {
                 return "Failed";
             }
 
-            _CacheXML("https://raw.githubusercontent.com/LeagueRaINi/HesaEngine-Scripts/master/Versions.xml");
+            CacheXML("https://raw.githubusercontent.com/LeagueRaINi/HesaEngine-Scripts/master/Versions.xml");
 
-            if (_CachedXML.Equals(string.Empty))
+            if (CachedXML.Equals(string.Empty))
             {
                 return "Failed";
             }
 
-            if (!_NeedsUpdate(Name, Version))
+            if (!NeedsUpdate(Name, Version))
             {
                 return "NoUpdate";
             }
 
-            string _Temp = _FoundScript();
-            if (_Temp.Equals(string.Empty) || _DownloadLink.Equals(string.Empty))
-            {
-                return "NewVersion";
-            }
+            return "NewVersion";
+        }
 
+        private static void CacheXML(string Link)
+        {
             using (WebClient _WebClient = new WebClient())
             {
-                Chat.Print("<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>Downloading the new Update");
-                _WebClient.DownloadFile(new Uri(_DownloadLink), _Temp);
-            }
-
-            return new FileInfo(_Temp).Length > 0 ? "Updated" : "DownloadFailed";
-        }
-
-
-
-        private static string _FoundScript()
-        {
-            foreach (var _Script in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path)), "Scripts"), "*.dll*", SearchOption.AllDirectories).ToList())
-            {
-                FileVersionInfo _FileInformation = FileVersionInfo.GetVersionInfo(_Script);
-                if (_FileInformation.OriginalFilename.Equals("[HESA]T2IN1-REBORN-ANNIE.dll"))
-                {
-                    return _Script;
-                }
-            }
-            return string.Empty;
-        }
-
-        private static void _CacheXML(string Link)
-        {
-            using (var _WebClient = new WebClient())
-            {
-                _CachedXML = _WebClient.DownloadString(Link);
+                CachedXML = _WebClient.DownloadString(Link);
             }
         }
 
-        private static bool _NeedsUpdate(string Name, string Version)
+        private static bool NeedsUpdate(string Name, string Version)
         {
-            var _Document = new XmlDocument();
-            _Document.LoadXml(_CachedXML);
+            XmlDocument _Document = new XmlDocument();
+            _Document.LoadXml(CachedXML);
 
-            var _Names = _Document.DocumentElement.SelectSingleNode("/T2IN1_UPDATER/SCRIPTS");
+            XmlNode _Names = _Document.DocumentElement.SelectSingleNode("/T2IN1_UPDATER/SCRIPTS");
             foreach (XmlNode _Node in _Names)
             {
                 if (_Node.Attributes.GetNamedItem("VALUE").InnerText.Equals(Name))
                 {
-                    var _CurrentVersion = new System.Version(Version); var _DatabaseVersion = new System.Version(_Node.ChildNodes[0].InnerText);
+                    System.Version _CurrentVersion = new System.Version(Version); System.Version _DatabaseVersion = new System.Version(_Node.ChildNodes[0].InnerText);
                     if (_CurrentVersion.CompareTo(_DatabaseVersion) >= 0)
                     {
                         return false;
                     }
-                    _DownloadLink = _Node.ChildNodes[1].InnerText;
                 }
             }
             return true;
         }
 
-        public static bool _HasInternet()
+        public static bool HasInternet()
         {
             try
             {
-                using (var _Client = new WebClient())
+                using (WebClient _Client = new WebClient())
                 {
-                    using (var _Stream = _Client.OpenRead("http://www.google.com"))
+                    using (Stream _Stream = _Client.OpenRead("http://www.google.com"))
                     {
                         return true;
                     }

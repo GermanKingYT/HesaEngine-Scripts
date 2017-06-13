@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 using _HESA_T2IN1_REBORN_ANNIE.Managers;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
+using HesaEngine.SDK.GameObjects;
 using SharpDX;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
@@ -13,11 +15,11 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
     {
         public static void Initialize()
         {
-            Drawing.OnDraw += _Drawing_OnDraw;
+            Drawing.OnDraw += Drawing_OnDraw;
             Logger.Log(">> Executed", ConsoleColor.Green);
         }
 
-        private static void _Drawing_OnDraw(EventArgs args)
+        private static void Drawing_OnDraw(EventArgs args)
         {
             if (Globals.MyHero.IsDead)
                 return;
@@ -48,10 +50,10 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             {
                 if (SpellSlot.R.CanUseSpell() && !Globals.IsTibbersSpawned)
                 {
-                    var _Target = TargetSelector.GetTarget(SpellsManager.R.Range);
+                    AIHeroClient _Target = TargetSelector.GetTarget(SpellsManager.R.Range);
                     if (_Target.IsValidTarget(625))
                     {
-                        var _PositionAndHits = Other.Prediction.GetBestUltimatePosition(_Target.ServerPosition.To2D());
+                        Dictionary<Vector2, int> _PositionAndHits = Other.Prediction.GetBestUltimatePosition(_Target.ServerPosition.To2D());
                         if (_PositionAndHits.First().Value >= Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue)
                         {
                             if (Menus.ComboMenu.Get<MenuCheckbox>("OnlyIfStunReadyR").Checked)
@@ -106,7 +108,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Visuals
             /* TODO: OPTIMIZE */
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawBoundingRadius").Checked)
             {
-                foreach (var _Enemy in ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisibleOnScreen))
+                foreach (AIHeroClient _Enemy in ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisibleOnScreen && e.IsVisible))
                 {
                     Drawing.DrawCircle(_Enemy.Position, _Enemy.BoundingRadius);
                 }

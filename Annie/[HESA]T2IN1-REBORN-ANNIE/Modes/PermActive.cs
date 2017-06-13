@@ -33,7 +33,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
 
                         if (SpellSlot.W.CanUseSpell())
                         {
-                            Globals.DelayAction(() => SpellsManager.W.Cast());
+                            Globals.DelayAction(() => SpellsManager.W.Cast(Globals.MyHero.Position));
                         }
                     }
                     else

@@ -11,11 +11,11 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
     {
         public static void Initialize()
         {
-            Game.OnTick += _Game_OnTick;
+            Game.OnTick += Game_OnTick;
             Logger.Log(">> Executed", ConsoleColor.Green);
         }
 
-        private static void _Game_OnTick()
+        private static void Game_OnTick()
         {
             if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
                 return;

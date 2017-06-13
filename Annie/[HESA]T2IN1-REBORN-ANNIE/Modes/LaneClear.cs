@@ -3,6 +3,7 @@ using _HESA_T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
+using HesaEngine.SDK.GameObjects;
 using SharpDX;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Modes
@@ -19,11 +20,11 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Modes
                 }
             }
 
-            if (Menus.LastHitMenu.Get<MenuCheckbox>("UseQ").Checked)
+            if (Menus.LaneClearMenu.Get<MenuCheckbox>("UseQ").Checked)
             {
                 if (SpellSlot.Q.CanUseSpell())
                 {
-                    var _Target = Globals.GetLaneMinion(SpellsManager.Q);
+                    Obj_AI_Base _Target = Globals.GetLaneMinion(SpellsManager.Q);
                     if (_Target.IsValidTarget(SpellsManager.Q.Range))
                     {
                         Globals.DelayAction(() => SpellsManager.Q.Cast(_Target));

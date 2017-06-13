@@ -3,17 +3,17 @@
 using _HESA_T2IN1_REBORN_ANNIE;
 using _HESA_T2IN1_REBORN_ANNIE.Managers;
 using _HESA_T2IN1_REBORN_ANNIE.Visuals;
+using _HESA_T2IN1_REBORN_ANNIE.Other;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
-using _HESA_T2IN1_REBORN_ANNIE.Other;
 
 namespace _HESA_T2IN1_REBORN
 {
     public class Program : IScript
     {
         public string Name => "[T2IN1-REBORN] Annie";
-        public string Version => "1.4.2";
+        public string Version => "1.4.3";
         public string Author => "RaINi";
 
         public void OnInitialize()
@@ -56,12 +56,6 @@ namespace _HESA_T2IN1_REBORN
                         break;
                     case "NewVersion":
                         Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>A new update is available");
-                        break;
-                    case "Updated":
-                        Chat.Print("<font color='#27ae60'>[T2IN1-UPDATE-CHECKER] </font>Reload the script to use the new version");
-                        break;
-                    case "DownloadFailed":
-                        Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Download failed");
                         break;
                     default:
                         Chat.Print("<font color='#e74c3c'>[T2IN1-UPDATE-CHECKER] </font>Could not check for updates");

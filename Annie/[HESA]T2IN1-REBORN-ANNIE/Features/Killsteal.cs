@@ -4,6 +4,7 @@ using _HESA_T2IN1_REBORN_ANNIE.Managers;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
+using HesaEngine.SDK.GameObjects;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Features
 {
@@ -13,8 +14,8 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
         {
             if (SpellSlot.Q.CanUseSpell() && SpellSlot.W.CanUseSpell())
             {
-                var _Slots = new[] { SpellSlot.Q, SpellSlot.W };
-                var _Target = ObjectManager.Heroes.Enemies.FirstOrDefault(e => e.IsValidTarget(625) && Globals.MyHero.GetComboDamage(e, _Slots) >= e.Health);
+                SpellSlot[] _Slots = new[] { SpellSlot.Q, SpellSlot.W };
+                AIHeroClient _Target = ObjectManager.Heroes.Enemies.FirstOrDefault(e => e.IsValidTarget(625) && Globals.MyHero.GetComboDamage(e, _Slots) >= e.Health);
                 if (_Target.IsValidTarget(625))
                 {
                     Globals.DelayAction(() => SpellsManager.Q.Cast(_Target));
@@ -23,7 +24,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
             }
             else if (SpellSlot.Q.CanUseSpell())
             {
-                var _Target = ObjectManager.Heroes.Enemies.FirstOrDefault(e => e.IsValidTarget(SpellsManager.Q.Range) && Globals.MyHero.GetSpellDamage(e, SpellSlot.Q) >= e.Health);
+                AIHeroClient _Target = ObjectManager.Heroes.Enemies.FirstOrDefault(e => e.IsValidTarget(SpellsManager.Q.Range) && Globals.MyHero.GetSpellDamage(e, SpellSlot.Q) >= e.Health);
                 if (_Target.IsValidTarget(SpellsManager.Q.Range))
                 {
                     Globals.DelayAction(() => SpellsManager.Q.Cast(_Target));
@@ -31,7 +32,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Features
             }
             else if (SpellSlot.W.CanUseSpell())
             {
-                var _Target = ObjectManager.Heroes.Enemies.FirstOrDefault(e => e.IsValidTarget(SpellsManager.W.Range) && Globals.MyHero.GetSpellDamage(e, SpellSlot.W) >= e.Health);
+                AIHeroClient _Target = ObjectManager.Heroes.Enemies.FirstOrDefault(e => e.IsValidTarget(SpellsManager.W.Range) && Globals.MyHero.GetSpellDamage(e, SpellSlot.W) >= e.Health);
                 if (_Target.IsValidTarget(SpellsManager.W.Range))
                 {
                     Globals.DelayAction(() => SpellsManager.W.CastOnUnit(_Target));

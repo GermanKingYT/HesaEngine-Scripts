@@ -14,21 +14,21 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
     internal class Prediction
     {
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
-        private static List<Vector3> _GetEnemiePositions()
+        private static List<Vector3> GetEnemiePositions()
         {
             return ObjectManager.Heroes.Enemies.Where(e => !e.IsDead && e.IsVisible && e.IsValidTarget() && Globals.MyHero.Distance(e) <= 1200).Select(Hero => new HesaEngine.SDK.Prediction().GetPrediction(Hero, 500).UnitPosition).ToList();
         }
 
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
-        private static int _CountUltimateHits(Vector2 CastPosition)
+        private static int CountUltimateHits(Vector2 CastPosition)
         {
-            return _GetEnemiePositions().To2D().Count(EnemyPos => CastPosition.Distance(EnemyPos) <= 250);
+            return GetEnemiePositions().To2D().Count(EnemyPos => CastPosition.Distance(EnemyPos) <= 250);
         }
 
         /* Pasta from WuAnnie */ /* TODO: Rework later, needs improvement */
         public static Dictionary<Vector2, int> GetBestUltimatePosition(Vector2 TargetPosition)
         {
-            var _UltimatePosition = new List<Vector2>
+            List<Vector2> _UltimatePosition = new List<Vector2>
             {
                 new Vector2(TargetPosition.X - 250, TargetPosition.Y + 100),
                 new Vector2(TargetPosition.X - 250, TargetPosition.Y),
@@ -79,7 +79,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
                 new Vector2(TargetPosition.X + 250, TargetPosition.Y + 100)
             };
 
-            var _PositionAndHits = _UltimatePosition.ToDictionary(_Position => _Position, _CountUltimateHits);
+            Dictionary<Vector2, int> _PositionAndHits = _UltimatePosition.ToDictionary(_Position => _Position, CountUltimateHits);
             Vector2 _PosToGG = _PositionAndHits.First(pos => pos.Value == _PositionAndHits.Values.Max()).Key;
             int _Hits = _PositionAndHits.First(pos => pos.Key == _PosToGG).Value;
             return new Dictionary<Vector2, int> { { _PosToGG, _Hits } };
@@ -88,7 +88,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
         /* Pasta from WuAnnie */ /* TODO: MAYBE REWORK LATER */
         public static int GetBestLocationW(GameObjectType type, out Vector3 pos)
         {
-            var _SectorList = new List<Geometry.Polygon.Sector>();
+            List<Geometry.Polygon.Sector> _SectorList = new List<Geometry.Polygon.Sector>();
             pos = Vector3.Zero;
 
             List<Obj_AI_Minion> _MinionList = ObjectManager.MinionsAndMonsters.Enemy.Where(m => !m.IsDead && m.IsValidTarget(SpellsManager.W.Range)).OrderByDescending(m => m.Distance(Globals.MyHero)).ToList();
@@ -99,7 +99,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
             if (_Enemy == null)
                 return 0;
 
-            var _Vectors = new List<Vector3>
+            List<Vector3> _Vectors = new List<Vector3>
             {
                 new Vector3(_Enemy.ServerPosition.X + 550, _Enemy.ServerPosition.Y, _Enemy.ServerPosition.Z),
                 new Vector3(_Enemy.ServerPosition.X - 550, _Enemy.ServerPosition.Y, _Enemy.ServerPosition.Z),
@@ -113,15 +113,15 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
             };
 
             float _Angle = (float)(5 * Math.PI / 18);
-            var _Sector1 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[0], _Angle, 585);
-            var _Sector2 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[1], _Angle, 585);
-            var _Sector3 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[2], _Angle, 585);
-            var _Sector4 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[3], _Angle, 585);
-            var _Sector5 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[4], _Angle, 585);
-            var _Sector6 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[5], _Angle, 585);
-            var _Sector7 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[6], _Angle, 585);
-            var _Sector8 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[7], _Angle, 585);
-            var _Sector9 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[8], _Angle, 585);
+            Geometry.Polygon.Sector _Sector1 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[0], _Angle, 585);
+            Geometry.Polygon.Sector _Sector2 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[1], _Angle, 585);
+            Geometry.Polygon.Sector _Sector3 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[2], _Angle, 585);
+            Geometry.Polygon.Sector _Sector4 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[3], _Angle, 585);
+            Geometry.Polygon.Sector _Sector5 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[4], _Angle, 585);
+            Geometry.Polygon.Sector _Sector6 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[5], _Angle, 585);
+            Geometry.Polygon.Sector _Sector7 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[6], _Angle, 585);
+            Geometry.Polygon.Sector _Sector8 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[7], _Angle, 585);
+            Geometry.Polygon.Sector _Sector9 = new Geometry.Polygon.Sector(Globals.MyHero.Position, _Vectors[8], _Angle, 585);
 
             _SectorList.Add(_Sector1);
             _SectorList.Add(_Sector2);
@@ -133,7 +133,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Other
             _SectorList.Add(_Sector8);
             _SectorList.Add(_Sector9);
 
-            var _CSHits = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            List<int> _CSHits = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             for (int _Count = 0; _Count < 9; _Count++)
             {
                 if (type == GameObjectType.AIHeroClient)

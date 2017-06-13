@@ -2,7 +2,6 @@
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.Enums;
-using HesaEngine.SDK.GameObjects;
 
 namespace _HESA_T2IN1_REBORN_ANNIE.Managers
 {
@@ -20,8 +19,6 @@ namespace _HESA_T2IN1_REBORN_ANNIE.Managers
             Q.SetTargetted(0.25f, 870f);
             W.SetSkillshot(0.6f, 1f, float.MaxValue, false, SkillshotType.SkillshotLine);
             R.SetSkillshot(0.5f, 200f, float.MaxValue, false, SkillshotType.SkillshotCircle);
-
-            AIHeroClient.OnLevelUp += Features.AutoLeveler.OnLevelUp;
 
             Logger.Log(">> Executed", ConsoleColor.Green);
         }

@@ -41,7 +41,7 @@ namespace _HESA_T2IN1_REBORN_ANNIE
                 if (!(_Minions.Count() > 1))
                     return null;
 
-                _Temp = _Minions.Skip(1).First();
+                _Temp = _Minions.ElementAt(1);
             }
 
             if (!_Temp.IsValidTarget())

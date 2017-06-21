@@ -10,7 +10,6 @@ namespace T2IN1_REBORN_LIB
     {
         public static bool IsEmpty<T>(this IEnumerable<T> source) => !source.Any();
 
-        public static Random Randomizer = new Random();
-        public static void DelayAction(Action action) { Core.DelayAction(action, Randomizer.Next(300, 500)); }
+        public static void DelayAction(Action action) { Core.DelayAction(action, new Random().Next(300, 500)); }
     }
 }

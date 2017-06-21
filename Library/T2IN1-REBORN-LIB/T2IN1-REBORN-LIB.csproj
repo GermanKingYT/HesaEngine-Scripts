@@ -52,13 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Drawings.cs" />
+    <Compile Include="Features\Updater.cs" />
     <Compile Include="Helpers\Entities.cs" />
+    <Compile Include="Helpers\Prediction.cs" />
     <Compile Include="Helpers\Spells.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

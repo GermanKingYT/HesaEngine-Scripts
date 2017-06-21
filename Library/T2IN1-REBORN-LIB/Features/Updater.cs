@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Xml;
+using HesaEngine.SDK;
 
 namespace T2IN1_REBORN_LIB.Features
 {
@@ -11,6 +12,8 @@ namespace T2IN1_REBORN_LIB.Features
 
         public static string Run(string name, string version)
         {
+            Logger.Log(">> Executed");
+
             if (!HasInternet())  return "Failed";
 
             CacheXML("https://raw.githubusercontent.com/LeagueRaINi/HesaEngine-Scripts/master/Versions.xml");

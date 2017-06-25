@@ -22,7 +22,7 @@ namespace T2IN1_REBORN_ANNIE
         public static IEnumerable<Obj_AI_Base> CachedEnemies { get; set; }
         public static IEnumerable<Obj_AI_Base> CachedAllies { get; set; }
 
-        public static bool IsPassiveReady => MyHero.HasBuff("pyromania_particle");
+        public static bool IsPassiveReady = false;
 
         public static Obj_AI_Minion Tibbers => ObjectManager.MinionsAndMonsters.Ally.FirstOrDefault(x => x.Name.ToLower().Contains("tibbers"));
         public static bool IsTibbersSpawned => MyHero.GetSpell(SpellSlot.R).SpellData.Name.Equals("InfernalGuardianGuide");

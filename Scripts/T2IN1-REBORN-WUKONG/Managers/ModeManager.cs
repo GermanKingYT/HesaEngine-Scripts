@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using T2IN1_REBORN_LIB.Helpers;
 
 using T2IN1_REBORN_WUKONG.Modes;
@@ -15,63 +15,50 @@ namespace T2IN1_REBORN_WUKONG.Managers
     {
         public static void Initialize()
         {
-            Game.OnTick += Game_OnTick;
-
-            Orbwalker.AfterAttack += (sender, ArgsTarget) =>
+            Game.OnTick += () =>
             {
-                if (!sender.IsMe || ObjectManager.Me.IsDead) return;
+                /* TODO: TEMP TILL ON LEVEL UP IS FIXED */
+                AutoLeveler.TempFix();
 
-                var target = ArgsTarget as AIHeroClient;
-                if (target == null || !target.IsValidTarget() || !SpellsManager.Q.IsUsable()) return;
+                Globals.CachedEnemies = Entities.GetEnemies;
 
-                SpellsManager.Q.Cast();
-                Orbwalker.ResetAutoAttackTimer();
+                if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
+                    return;
+
+                if (Globals.IsUltimateActive) return;
+
+                switch (Globals.OrbwalkerMode) 
+                {
+                    case Orbwalker.OrbwalkingMode.Combo: 
+                    {
+                        Combo.Run();
+                        return;
+                    }
+                    case Orbwalker.OrbwalkingMode.LaneClear: 
+                    {
+                        if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent) 
+                        {
+                            LaneClear.Run();
+                        }
+                        return;
+                    }
+                    case Orbwalker.OrbwalkingMode.LastHit: 
+                    {
+                        if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent) 
+                        {
+                            LastHit.Run();
+                        }
+                        return;
+                    }
+                    case Orbwalker.OrbwalkingMode.JungleClear:
+                    {
+                        JungleClear.Run();
+                        return;
+                    }
+                }
             };
 
             Logger.Log(">> Executed", ConsoleColor.Green);
-        }
-
-       
-
-        private static void Game_OnTick()
-        {
-            /* TODO: TEMP TILL ON LEVEL UP IS FIXED */
-            AutoLeveler.TempFix();
-
-            Globals.CachedEnemies = Entities.GetEnemies;
-
-            if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
-                return;
-
-            PermActive.Initialize();
-
-            if (Menus.MiscMenu.Get<MenuCheckbox>("KillSteal").Checked && Globals.Orb.ActiveMode != Orbwalker.OrbwalkingMode.Combo) { Killsteal.Run(); }
-            if (Menus.ActivatorMenu.Get<MenuCheckbox>("EnableActivator").Checked) { Features.Activator.Run(); }
-
-            switch (Globals.OrbwalkerMode)
-            {
-                case Orbwalker.OrbwalkingMode.Combo:
-                {
-                    Combo.Run();
-                    break;
-                }
-                case Orbwalker.OrbwalkingMode.LaneClear:
-                {
-                    if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent)
-                    {
-                        LaneClear.Run();
-                    }
-                    break;
-                }
-                case Orbwalker.OrbwalkingMode.LastHit:
-                {
-                    if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent)
-                    {
-                        LastHit.Run();
-                    }
-                    break;
-                }
-            }
         }
     }
 }

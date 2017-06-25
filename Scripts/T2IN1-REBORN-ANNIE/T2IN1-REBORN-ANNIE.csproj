@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\Binaries\T2IN1-REBORN-ANNIE\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -81,6 +81,7 @@
     <Compile Include="Features\Interrupt.cs" />
     <Compile Include="Features\Killsteal.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\ModeManager.cs" />
     <Compile Include="Managers\SpellsManager.cs" />
     <Compile Include="Modes\Combo.cs" />
@@ -89,6 +90,11 @@
     <Compile Include="Modes\PermActive.cs" />
     <Compile Include="Modes\Tibbers.cs" />
     <Compile Include="Other\Prediction.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Visuals\DamageIndicator.cs" />
     <Compile Include="Visuals\Drawings.cs" />
     <Compile Include="Visuals\Menus.cs" />
@@ -97,6 +103,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

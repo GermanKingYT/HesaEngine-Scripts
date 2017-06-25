@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 using T2IN1_REBORN_LIB;
+using T2IN1_REBORN_LIB.Helpers;
 
 using HesaEngine.SDK;
-using HesaEngine.SDK.Enums;
 using HesaEngine.SDK.GameObjects;
-using T2IN1_REBORN_LIB.Helpers;
 
 namespace T2IN1_REBORN_WUKONG
 {
@@ -22,7 +21,7 @@ namespace T2IN1_REBORN_WUKONG
         public static IEnumerable<Obj_AI_Base> CachedEnemies { get; set; }
         public static IEnumerable<Obj_AI_Base> CachedAllies { get; set; }
 
-        public static bool IsUltimateActive => MyHero.HasBuff("MonkeyKingSpinToWin");
+        public static bool IsUltimateActive = false;
 
         private static float MyMinionHealthPrediction(this Obj_AI_Base minion, Spell daSpell) => MinionHealthPrediction.GetHealthPrediction(minion, Game.GameTimeTickCount, (int)Math.Ceiling(daSpell.Delay));
         private static Obj_AI_Base LastMinion { get; set; }

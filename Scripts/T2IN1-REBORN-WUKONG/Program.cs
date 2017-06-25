@@ -47,6 +47,7 @@ namespace T2IN1_REBORN_WUKONG
                         Drawings.Initialize();
                         DamageIndicator.Initialize();
                         ModeManager.Initialize();
+                        EventManager.Initialize();
                     }
                     catch (Exception exception) 
                     {

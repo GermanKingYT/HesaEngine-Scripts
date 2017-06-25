@@ -9,6 +9,7 @@ namespace T2IN1_REBORN_WUKONG.Visuals
         public static Menu HomeMenu;
         public static Menu ActivatorMenu;
         public static Menu ComboMenu;
+        public static Menu JungleClearMenu;
         public static Menu LaneClearMenu;
         public static Menu LastHitMenu;
         public static Menu VisualsMenu;
@@ -18,28 +19,40 @@ namespace T2IN1_REBORN_WUKONG.Visuals
         {
             HomeMenu = Menu.AddMenu("[T2IN1-REBORN] " + Globals.MyHero.ChampionName);
 
-            /* Activator Section */
-            ActivatorMenu = HomeMenu.AddSubMenu("> ACTIVATOR");
-            ActivatorMenu.AddSeparator("-Activate-");
-            ActivatorMenu.Add(new MenuCheckbox("EnableActivator", "Enable Activator", true));
-            ActivatorMenu.AddSeparator("-Summoners-");
-            ActivatorMenu.Add(new MenuCheckbox("AutoIgnite", "Auto use Ignite if Killable"));
-            ActivatorMenu.AddSeparator("-Pots-");
-            ActivatorMenu.Add(new MenuCheckbox("AutoUsePots", "Auto use Health Pots", true));
-            ActivatorMenu.Add(new MenuCheckbox("AutoUsePotsOnBuff", "Auto use Health Pots if Poisened / has Damage Buff", true));
-            ActivatorMenu.Add(new MenuSlider("AutoUsePotsHealth", "Use if Health Percent is below or equal", 1, 100, 30));
-
             /* Combo Section */
             ComboMenu = HomeMenu.AddSubMenu("> COMBO");
             ComboMenu.AddSeparator("-Combo Settings-");
+            ComboMenu.Add(new MenuCheckbox("UseQ", "Use Q in Combo", true));
+            ComboMenu.Add(new MenuCheckbox("UseE", "Use E in Combo", true));
+            ComboMenu.Add(new MenuCheckbox("UseR", "Use R in Combo", true));
+            ComboMenu.AddSeparator("-Extra Options-");
+            ComboMenu.Add(new MenuSlider("MinEnemiesHitableR", "Min Enemys Hitable to use R", 1, 5, 1));
+
+            /* JungleClear Section */
+            JungleClearMenu = HomeMenu.AddSubMenu("> JUNGLE CLEAR");
+            JungleClearMenu.AddSeparator("-Spells-");
+            JungleClearMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
+            JungleClearMenu.Add(new MenuCheckbox("UseW", "Use W", true));
+            JungleClearMenu.Add(new MenuCheckbox("UseE", "Use E", true));
 
             /* LaneClear Section */
             LaneClearMenu = HomeMenu.AddSubMenu("> LANE CLEAR");
+            LaneClearMenu.AddSeparator("-Spells-");
+            LaneClearMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
+            LaneClearMenu.Add(new MenuCheckbox("UseW", "Use W", true));
+            LaneClearMenu.Add(new MenuCheckbox("UseE", "Use E", true));
+            LaneClearMenu.AddSeparator("-Extra Options-");
+            LaneClearMenu.Add(new MenuSlider("MinMinionsW", "Min Hitable Minions to use W", 1, 5, 1));
+            LaneClearMenu.Add(new MenuSlider("MinMinionsE", "Min Hitable Minions to use E", 1, 5, 1));
             LaneClearMenu.AddSeparator("-Mana Options-");
             LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana Percent to use Spells", 0, 100, 45));
 
             /* LastHit Section */
             LastHitMenu = HomeMenu.AddSubMenu("> LAST HIT");
+            LastHitMenu.AddSeparator("-Spells-");
+            LastHitMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
+            LastHitMenu.Add(new MenuCheckbox("UseW", "Use W", true));
+            LastHitMenu.Add(new MenuCheckbox("UseE", "Use E", true));
             LastHitMenu.AddSeparator("-Mana Options-");
             LastHitMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 45));
 
@@ -62,19 +75,15 @@ namespace T2IN1_REBORN_WUKONG.Visuals
             MiscMenu = HomeMenu.AddSubMenu("> MISC");
             MiscMenu.AddSeparator("-Killsteal-");
             MiscMenu.Add(new MenuCheckbox("KillSteal", "Auto KillSteal"));
-            MiscMenu.AddSeparator("-Passive-");
-            MiscMenu.Add(new MenuCheckbox("AutoStackPassive", "Auto Stack Passive", true));
-            MiscMenu.Add(new MenuSlider("StackPassiveManaSpawn", "Min Mana % to use W/E in Spawn", 0, 100, 90));
-            MiscMenu.Add(new MenuSlider("StackPassiveMana", "Min Mana % to Auto Stack with E", 0, 100, 90));
             /* MiscMenu.AddSeparator("-Interrupt-");
             MiscMenu.Add(new MenuCheckbox("InterruptOnGapCloser", "Interrupt Enemy GapCloser with Stun", true));
             MiscMenu.Add(new MenuCheckbox("InterruptPassive", "Use Passive to Interrupt Enemy"));
             MiscMenu.Add(new MenuCheckbox("InterruptR", "Use R to Interrupt Enemy")); TODO: IMPLEMENT */
             MiscMenu.AddSeparator("-Auto Leveler-");
             MiscMenu.Add(new MenuCheckbox("AutoLevel", "Enable Auto Leveler"));
-            MiscMenu.Add(new MenuCombo("AutoLevelFirstFocus", "1 Spell to Focus", new[] { "Q", "W", "E" }));
-            MiscMenu.Add(new MenuCombo("AutoLevelSecondFocus", "2 Spell to Focus", new[] { "Q", "W", "E" }));
-            MiscMenu.Add(new MenuCombo("AutoLevelThirdFocus", "3 Spell to Focus", new[] { "Q", "W", "E" }));
+            MiscMenu.Add(new MenuCombo("AutoLevelFirstFocus", "1 Spell to Focus", new[] { "Q", "W", "E" }, 0));
+            MiscMenu.Add(new MenuCombo("AutoLevelSecondFocus", "2 Spell to Focus", new[] { "Q", "W", "E" }, 1));
+            MiscMenu.Add(new MenuCombo("AutoLevelThirdFocus", "3 Spell to Focus", new[] { "Q", "W", "E" }, 2));
             MiscMenu.Add(new MenuSlider("AutoLevelDelaySlider", "Delay Slider", 200, 150, 500));
 
             Logger.Log(">> Executed", ConsoleColor.Green);

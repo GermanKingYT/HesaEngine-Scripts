@@ -1,6 +1,7 @@
 ﻿using T2IN1_REBORN_LIB.Helpers;
 
 using T2IN1_REBORN_WUKONG.Managers;
+using T2IN1_REBORN_WUKONG.Visuals;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.GameObjects;
@@ -11,20 +12,25 @@ namespace T2IN1_REBORN_WUKONG.Modes
     {
         public static void Run()
         {
-            AIHeroClient targetE = TargetSelector.GetTarget(SpellsManager.E.Range);
-            AIHeroClient targetR = TargetSelector.GetTarget(SpellsManager.R.Range);
-
-            if (Globals.IsUltimateActive) return;
-
-            if (SpellsManager.E.IsUsable() && targetE.IsValidTarget(SpellsManager.E.Range)) 
+            if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked)
             {
-                SpellsManager.E.Cast(targetE);
+                AIHeroClient targetE = TargetSelector.GetTarget(SpellsManager.E.Range);
+                if (SpellsManager.E.IsUsable() && targetE.IsValidTarget(SpellsManager.E.Range)) 
+                {
+                    SpellsManager.E.Cast(targetE);
+                }
             }
 
-            if (SpellsManager.R.IsUsable() && targetR.IsValidTarget(SpellsManager.R.Range)) 
+            if (Menus.ComboMenu.Get<MenuCheckbox>("UseR").Checked)
             {
-                SpellsManager.R.Cast();
-            }
+                if (Menus.ComboMenu.Get<MenuCheckbox>("UseQ").Checked && SpellsManager.Q.IsUsable()) return;
+                if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked && SpellsManager.E.IsUsable()) return;
+
+                if (SpellsManager.R.IsUsable() && Globals.MyHero.CountEnemiesInRange(SpellsManager.R.Range) >= Menus.ComboMenu.Get<MenuSlider>("MinEnemiesHitableR").CurrentValue) 
+                {
+                    SpellsManager.R.Cast();
+                }
+            } 
         }
     }
 }

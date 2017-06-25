@@ -47,6 +47,7 @@ namespace T2IN1_REBORN_ANNIE
                         Drawings.Initialize();
                         DamageIndicator.Initialize();
                         ModeManager.Initialize();
+                        EventManager.Initialize();
                         /* Interrupt.Initialize(); TODO: FINISH */
                     }
                     catch (Exception _Exception) 

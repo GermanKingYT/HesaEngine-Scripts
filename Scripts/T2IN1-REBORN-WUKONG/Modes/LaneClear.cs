@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using T2IN1_REBORN_LIB.Helpers;
 
 using T2IN1_REBORN_WUKONG.Managers;
+using T2IN1_REBORN_WUKONG.Visuals;
 
 using HesaEngine.SDK;
 using HesaEngine.SDK.GameObjects;
@@ -14,32 +15,30 @@ namespace T2IN1_REBORN_WUKONG.Modes
     {
         public static void Run()
         {
-            if (SpellsManager.Q.IsUsable())
+            IEnumerable<Obj_AI_Minion> minions = Entities.GetLaneMinions(SpellsManager.E.Range);
+
+            if (Menus.LaneClearMenu.Get<MenuCheckbox>("UseW").Checked)
             {
-                Obj_AI_Base minion = Entities.GetLaneMinions(300).FirstOrDefault(x => SpellsManager.Q.GetDamage(x) >= MinionHealthPrediction.GetHealthPrediction(x, Game.GameTimeTickCount + 100, (int)Math.Ceiling(SpellsManager.Q.Delay)));
-                if (minion.IsValidTarget(SpellsManager.Q.Range))
+                if (SpellsManager.W.IsUsable()) 
                 {
-                    SpellsManager.Q.Cast();
+                    if (minions.FirstOrDefault(x => x.CountEnemyLaneMinions(175) >= Menus.LaneClearMenu.Get<MenuSlider>("MinMinionsW").CurrentValue).IsValidTarget(SpellsManager.E.Range)) 
+                    {
+                        SpellsManager.W.Cast();
+                    }
                 }
             }
 
-            if (SpellsManager.W.IsUsable()) 
+            if (Menus.LaneClearMenu.Get<MenuCheckbox>("UseE").Checked)
             {
-                Obj_AI_Base minion = Entities.GetLaneMinions(125).FirstOrDefault();
-                if (minion.IsValidTarget(SpellsManager.E.Range)) 
+                if (SpellsManager.E.IsUsable()) 
                 {
-                    SpellsManager.W.Cast();
+                    Obj_AI_Base minion = minions.FirstOrDefault(x => x.CountEnemyLaneMinions(187) >= Menus.LaneClearMenu.Get<MenuSlider>("MinMinionsE").CurrentValue);
+                    if (minion.IsValidTarget(SpellsManager.E.Range)) 
+                    {
+                        SpellsManager.E.Cast(minion);
+                    }
                 }
-            }
-
-            if (SpellsManager.E.IsUsable()) 
-            {
-                Obj_AI_Base minion = Entities.GetLaneMinions(625).FirstOrDefault(x => SpellsManager.E.GetDamage(x) >= MinionHealthPrediction.GetHealthPrediction(x, Game.GameTimeTickCount, (int)Math.Ceiling(SpellsManager.E.Delay)));
-                if (minion.IsValidTarget(SpellsManager.E.Range)) 
-                {
-                    SpellsManager.E.Cast(minion);
-                }
-            }
+            }  
         }
     }
 }

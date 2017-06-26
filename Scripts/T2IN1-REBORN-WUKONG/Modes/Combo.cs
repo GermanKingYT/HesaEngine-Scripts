@@ -1,4 +1,5 @@
-﻿using T2IN1_REBORN_LIB.Helpers;
+﻿using System.Linq;
+using T2IN1_REBORN_LIB.Helpers;
 
 using T2IN1_REBORN_WUKONG.Managers;
 using T2IN1_REBORN_WUKONG.Visuals;
@@ -14,10 +15,10 @@ namespace T2IN1_REBORN_WUKONG.Modes
         {
             if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked)
             {
-                AIHeroClient targetE = TargetSelector.GetTarget(SpellsManager.E.Range);
-                if (SpellsManager.E.IsUsable() && targetE.IsValidTarget(SpellsManager.E.Range)) 
+                Obj_AI_Base target = Globals.CachedEnemies.Where(x => x.IsValidTarget(SpellsManager.E.Range)).MinOrDefault(x => x.Health);
+                if (SpellsManager.E.IsUsable() && target.IsValidTarget(SpellsManager.E.Range)) 
                 {
-                    SpellsManager.E.Cast(targetE);
+                    SpellsManager.E.Cast(target);
                 }
             }
 

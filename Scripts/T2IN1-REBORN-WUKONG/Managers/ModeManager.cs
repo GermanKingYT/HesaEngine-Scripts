@@ -36,7 +36,7 @@ namespace T2IN1_REBORN_WUKONG.Managers
                     }
                     case Orbwalker.OrbwalkingMode.LaneClear: 
                     {
-                        if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent) 
+                        if (Menus.LaneClearMenu.Get<MenuSlider>("MaxMana").CurrentValue <= Globals.MyHeroManaPercent) 
                         {
                             LaneClear.Run();
                         }
@@ -44,7 +44,7 @@ namespace T2IN1_REBORN_WUKONG.Managers
                     }
                     case Orbwalker.OrbwalkingMode.LastHit: 
                     {
-                        if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue < Globals.MyHeroManaPercent) 
+                        if (Menus.LastHitMenu.Get<MenuSlider>("MaxMana").CurrentValue <= Globals.MyHeroManaPercent) 
                         {
                             LastHit.Run();
                         }
@@ -52,7 +52,10 @@ namespace T2IN1_REBORN_WUKONG.Managers
                     }
                     case Orbwalker.OrbwalkingMode.JungleClear:
                     {
-                        JungleClear.Run();
+                        if (Menus.JungleClearMenu.Get<MenuSlider>("MaxMana").CurrentValue <= Globals.MyHeroManaPercent) 
+                        {
+                            JungleClear.Run();
+                        }
                         return;
                     }
                 }

@@ -21,7 +21,14 @@ namespace T2IN1_REBORN_WUKONG
         public static IEnumerable<Obj_AI_Base> CachedEnemies { get; set; }
         public static IEnumerable<Obj_AI_Base> CachedAllies { get; set; }
 
-        public static bool IsUltimateActive = false;
+        public static bool IsUltimateActive => MyHero.HasBuff("monkeykingspintowin");
+
+        public static readonly string[] SmiteMobs =
+        {
+            "SRU_Red", "SRU_Blue", "SRU_Dragon_Water", "SRU_Dragon_Fire", "SRU_Dragon_Earth", "SRU_Dragon_Air",
+            "SRU_Dragon_Elder", "SRU_Baron", "SRU_Gromp", "SRU_Murkwolf", "SRU_Razorbeak", "SRU_RiftHerald", "SRU_Krug",
+            "Sru_Crab", "TT_Spiderboss", "TT_NGolem", "TT_NWolf", "TT_NWraith"
+        };
 
         private static float MyMinionHealthPrediction(this Obj_AI_Base minion, Spell daSpell) => MinionHealthPrediction.GetHealthPrediction(minion, Game.GameTimeTickCount, (int)Math.Ceiling(daSpell.Delay));
         private static Obj_AI_Base LastMinion { get; set; }

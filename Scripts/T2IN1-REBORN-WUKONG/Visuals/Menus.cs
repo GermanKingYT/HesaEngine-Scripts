@@ -6,14 +6,7 @@ namespace T2IN1_REBORN_WUKONG.Visuals
 {
     internal class Menus
     {
-        public static Menu HomeMenu;
-        public static Menu ActivatorMenu;
-        public static Menu ComboMenu;
-        public static Menu JungleClearMenu;
-        public static Menu LaneClearMenu;
-        public static Menu LastHitMenu;
-        public static Menu VisualsMenu;
-        public static Menu MiscMenu;
+        public static Menu HomeMenu, ActivatorMenu, ComboMenu, JungleClearMenu, LaneClearMenu, LastHitMenu, VisualsMenu, MiscMenu;
 
         public static void Initialize()
         {
@@ -26,6 +19,8 @@ namespace T2IN1_REBORN_WUKONG.Visuals
             ComboMenu.Add(new MenuCheckbox("UseE", "Use E in Combo", true));
             ComboMenu.Add(new MenuCheckbox("UseR", "Use R in Combo", true));
             ComboMenu.AddSeparator("-Extra Options-");
+            ComboMenu.Add(new MenuCheckbox("UseTiamat", "Use Tiamat for AA Cancel", true));
+            ComboMenu.Add(new MenuCheckbox("UseHydra", "Use Hydra for AA Cancel", true));
             ComboMenu.Add(new MenuSlider("MinEnemiesHitableR", "Min Enemys Hitable to use R", 1, 5, 1));
 
             /* JungleClear Section */
@@ -34,6 +29,10 @@ namespace T2IN1_REBORN_WUKONG.Visuals
             JungleClearMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
             JungleClearMenu.Add(new MenuCheckbox("UseW", "Use W", true));
             JungleClearMenu.Add(new MenuCheckbox("UseE", "Use E", true));
+            JungleClearMenu.AddSeparator("-Mana Options-");
+            JungleClearMenu.Add(new MenuCheckbox("UseTiamat", "Use Tiamat for AA Cancel", false));
+            JungleClearMenu.Add(new MenuCheckbox("UseHydra", "Use Hydra for AA Cancel", false));
+            JungleClearMenu.Add(new MenuSlider("MaxMana", "Min Mana Percent to use Spells", 0, 100, 45));
 
             /* LaneClear Section */
             LaneClearMenu = HomeMenu.AddSubMenu("> LANE CLEAR");
@@ -44,6 +43,8 @@ namespace T2IN1_REBORN_WUKONG.Visuals
             LaneClearMenu.AddSeparator("-Extra Options-");
             LaneClearMenu.Add(new MenuSlider("MinMinionsW", "Min Hitable Minions to use W", 1, 5, 1));
             LaneClearMenu.Add(new MenuSlider("MinMinionsE", "Min Hitable Minions to use E", 1, 5, 1));
+            LaneClearMenu.Add(new MenuCheckbox("UseTiamat", "Use Tiamat for AA Cancel", false));
+            LaneClearMenu.Add(new MenuCheckbox("UseHydra", "Use Hydra for AA Cancel", false));
             LaneClearMenu.AddSeparator("-Mana Options-");
             LaneClearMenu.Add(new MenuSlider("MaxMana", "Min Mana Percent to use Spells", 0, 100, 45));
 
@@ -53,6 +54,9 @@ namespace T2IN1_REBORN_WUKONG.Visuals
             LastHitMenu.Add(new MenuCheckbox("UseQ", "Use Q", true));
             LastHitMenu.Add(new MenuCheckbox("UseW", "Use W", true));
             LastHitMenu.Add(new MenuCheckbox("UseE", "Use E", true));
+            LastHitMenu.AddSeparator("-Extra Options-");
+            LastHitMenu.Add(new MenuCheckbox("UseTiamat", "Use Tiamat for AA Cancel", false));
+            LastHitMenu.Add(new MenuCheckbox("UseHydra", "Use Hydra for AA Cancel", false));
             LastHitMenu.AddSeparator("-Mana Options-");
             LastHitMenu.Add(new MenuSlider("MaxMana", "Min Mana % to use Spells", 0, 100, 45));
 
@@ -73,8 +77,6 @@ namespace T2IN1_REBORN_WUKONG.Visuals
 
             /* Misc Section */
             MiscMenu = HomeMenu.AddSubMenu("> MISC");
-            MiscMenu.AddSeparator("-Killsteal-");
-            MiscMenu.Add(new MenuCheckbox("KillSteal", "Auto KillSteal"));
             /* MiscMenu.AddSeparator("-Interrupt-");
             MiscMenu.Add(new MenuCheckbox("InterruptOnGapCloser", "Interrupt Enemy GapCloser with Stun", true));
             MiscMenu.Add(new MenuCheckbox("InterruptPassive", "Use Passive to Interrupt Enemy"));

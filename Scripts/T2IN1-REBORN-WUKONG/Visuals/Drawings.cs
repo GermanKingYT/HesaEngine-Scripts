@@ -43,12 +43,11 @@ namespace T2IN1_REBORN_WUKONG.Visuals
                 }
             }
 
-            /* TODO: OPTIMIZE */
             if (Menus.VisualsMenu.Get<MenuCheckbox>("DrawBoundingRadius").Checked)
             {
                 if (Globals.CachedEnemies == null || !Globals.CachedEnemies.Any()) return;
 
-                Globals.CachedEnemies.Where(x => !x.IsDead && x.IsVisibleOnScreen && x.IsVisible).ToList().ForEach(x => Drawing.DrawCircle(x.Position, x.BoundingRadius));
+                Globals.CachedEnemies.Where(x => !x.IsDead && x.IsValid() && x.IsVisibleOnScreen && x.IsVisible).ToList().ForEach(x => Drawing.DrawCircle(x.Position, x.BoundingRadius));
             }
         }
     }

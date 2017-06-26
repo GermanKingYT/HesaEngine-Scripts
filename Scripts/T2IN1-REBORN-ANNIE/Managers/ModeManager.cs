@@ -1,7 +1,5 @@
 ﻿using System;
 
-using T2IN1_REBORN_LIB.Helpers;
-
 using T2IN1_REBORN_ANNIE.Modes;
 using T2IN1_REBORN_ANNIE.Visuals;
 using T2IN1_REBORN_ANNIE.Features;
@@ -30,7 +28,7 @@ namespace T2IN1_REBORN_ANNIE.Managers
                 currentLevel = ObjectManager.Player.Level;
             }
 
-            Globals.CachedEnemies = Entities.GetEnemies;
+            Globals.CachedEnemies = Globals.GetEnemies;
 
             if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
                 return;

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using T2IN1_REBORN_LIB.Helpers;
-
 using T2IN1_REBORN_WUKONG.Managers;
 using T2IN1_REBORN_WUKONG.Visuals;
 
@@ -15,7 +13,7 @@ namespace T2IN1_REBORN_WUKONG.Modes
     {
         public static void Run()
         {
-            IEnumerable<Obj_AI_Minion> minions = Entities.GetLaneMinions(SpellsManager.E.Range);
+            IEnumerable<Obj_AI_Minion> minions = Globals.GetLaneMinions(SpellsManager.E.Range);
 
             if (Menus.LaneClearMenu.Get<MenuCheckbox>("UseW").Checked)
             {

@@ -1,8 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-
-using T2IN1_REBORN_LIB;
-using T2IN1_REBORN_LIB.Helpers;
 
 using T2IN1_REBORN_ANNIE.Visuals;
 
@@ -42,7 +40,7 @@ namespace T2IN1_REBORN_ANNIE.Modes
         /* TODO: UNFINISHED */
         private static void MethodMinion()
         {
-            IEnumerable<Obj_AI_Minion> minions = Entities.GetLaneMinions(2000);
+            IEnumerable<Obj_AI_Minion> minions = Globals.GetLaneMinions(2000);
 
             if (minions.IsEmpty())
                 return;
@@ -74,12 +72,12 @@ namespace T2IN1_REBORN_ANNIE.Modes
 
             if (AttackUnderTurret)
             {
-                Misc.DelayAction(() => SpellsManager.R.CastOnUnit(!target.IsUnderEnemyTurret() ? target : Globals.MyHero));
+                Core.DelayAction(() => SpellsManager.R.CastOnUnit(!target.IsUnderEnemyTurret() ? target : Globals.MyHero), new Random().Next(300,500));
                 /* Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, !target.IsUnderEnemyTurret() ? target : Globals.MyHero); */
             }
             else
             {
-                Misc.DelayAction(() => SpellsManager.R.CastOnUnit(target));
+                Core.DelayAction(() => SpellsManager.R.CastOnUnit(target), new Random().Next(300, 500));
                 /* Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, target); */
             }
         }
@@ -95,12 +93,12 @@ namespace T2IN1_REBORN_ANNIE.Modes
 
             if (AttackUnderTurret)
             {
-                Misc.DelayAction(() => SpellsManager.R.CastOnUnit(!target.IsUnderEnemyTurret() ? target : Globals.MyHero));
+                Core.DelayAction(() => SpellsManager.R.CastOnUnit(!target.IsUnderEnemyTurret() ? target : Globals.MyHero), new Random().Next(300, 500));
                 /* Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, !target.IsUnderEnemyTurret() ? target : Globals.MyHero); */
             }
             else
             {
-                Misc.DelayAction(() => SpellsManager.R.CastOnUnit(target));
+                Core.DelayAction(() => SpellsManager.R.CastOnUnit(target), new Random().Next(300, 500));
                 /* Globals.MyHero.IssueOrder(Globals.Tibbers.CanAttack ? GameObjectOrder.AutoAttackPet : GameObjectOrder.MovePet, target); */
             }
         }
@@ -115,12 +113,12 @@ namespace T2IN1_REBORN_ANNIE.Modes
 
                 if (AttackUnderTurret)
                 {
-                    Misc.DelayAction(() => SpellsManager.R.CastOnUnit(!target.IsUnderEnemyTurret() ? target : Globals.MyHero));
+                    Core.DelayAction(() => SpellsManager.R.CastOnUnit(!target.IsUnderEnemyTurret() ? target : Globals.MyHero), new Random().Next(300, 500));
                     /* Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, !target.IsUnderEnemyTurret() ? target : Globals.MyHero); */
                 }
                 else
                 {
-                    Misc.DelayAction(() => SpellsManager.R.CastOnUnit(target));
+                    Core.DelayAction(() => SpellsManager.R.CastOnUnit(target), new Random().Next(300, 500));
                     /* Globals.MyHero.IssueOrder(GameObjectOrder.MovePet, target); */
                 }
             }

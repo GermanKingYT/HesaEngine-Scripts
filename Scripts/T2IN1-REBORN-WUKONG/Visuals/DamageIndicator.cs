@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-using T2IN1_REBORN_LIB.Helpers;
-
 using HesaEngine.SDK;
 using SharpDX;
 
@@ -25,7 +23,7 @@ namespace T2IN1_REBORN_WUKONG.Visuals
 
             Globals.CachedEnemies.Where(e => e.IsEnemy && !e.IsDead && e.IsValidTarget() && e.IsVisibleOnScreen).ToList().ForEach(x =>
             {
-                double _Damage = Spells.TotalSpellDamage(x);
+                double _Damage = Globals.TotalSpellDamage(x);
 
                 /* TODO: Waiting for HPBarPosition 
                     var _DamagePercent = (_Enemy.TotalShieldHealth - _Damage > 0 ? _Enemy.TotalShieldHealth - _Damage : 0) / _Enemy.AllShield + _Enemy.Health;

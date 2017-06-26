@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 
-using T2IN1_REBORN_LIB;
-
 using T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;

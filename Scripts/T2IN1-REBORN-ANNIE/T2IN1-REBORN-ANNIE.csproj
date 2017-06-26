@@ -71,11 +71,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <Reference Include="T2IN1-REBORN-LIB">
-      <HintPath>..\..\Library\bin\Release\T2IN1-REBORN-LIB.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extras\Updater.cs" />
     <Compile Include="Features\Activator.cs" />
     <Compile Include="Features\AutoLeveler.cs" />
     <Compile Include="Features\Interrupt.cs" />

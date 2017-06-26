@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-using T2IN1_REBORN_LIB.Helpers;
-
 using T2IN1_REBORN_ANNIE.Managers;
 
 using HesaEngine.SDK;
@@ -51,7 +49,7 @@ namespace T2IN1_REBORN_ANNIE.Visuals
             {
                 if (SpellsManager.R.IsUsable() && !Globals.IsTibbersSpawned)
                 {
-                    Vector3 bestCastPosition = T2IN1_REBORN_LIB.Helpers.Prediction.GetBestCastPosition(GameObjectType.AIHeroClient, SpellsManager.R, Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue, 235);
+                    Vector3 bestCastPosition = Other.Prediction.GetBestCircularCastPosition(GameObjectType.AIHeroClient, SpellsManager.R, Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue, 235);
 
                     if (bestCastPosition != Vector3.Zero) 
                     {

@@ -1,7 +1,4 @@
-﻿using T2IN1_REBORN_LIB;
-using T2IN1_REBORN_LIB.Helpers;
-
-using T2IN1_REBORN_ANNIE.Managers;
+﻿using T2IN1_REBORN_ANNIE.Managers;
 using T2IN1_REBORN_ANNIE.Visuals;
 
 using HesaEngine.SDK;
@@ -46,7 +43,7 @@ namespace T2IN1_REBORN_ANNIE.Modes
                 {
                     if (targetR.IsValidTarget(SpellsManager.R.Range))
                     {
-                        Vector3 bestCastPosition = T2IN1_REBORN_LIB.Helpers.Prediction.GetBestCastPosition(GameObjectType.AIHeroClient, SpellsManager.R, Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue, 235);
+                        Vector3 bestCastPosition = Other.Prediction.GetBestCircularCastPosition(GameObjectType.AIHeroClient, SpellsManager.R, Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue, 235);
                         if (bestCastPosition != Vector3.Zero)
                         {
                             SpellsManager.R.Cast(bestCastPosition);
@@ -84,7 +81,7 @@ namespace T2IN1_REBORN_ANNIE.Modes
                     {
                         if (targetR.IsValidTarget(SpellsManager.R.Range))
                         {
-                            Vector3 bestCastPosition = T2IN1_REBORN_LIB.Helpers.Prediction.GetBestCastPosition(GameObjectType.AIHeroClient, SpellsManager.R, Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue, 235);
+                            Vector3 bestCastPosition = Other.Prediction.GetBestCircularCastPosition(GameObjectType.AIHeroClient, SpellsManager.R, Menus.ComboMenu.Get<MenuSlider>("UltimateTargets").CurrentValue, 235);
                             if (bestCastPosition != Vector3.Zero) 
                             {
                                 SpellsManager.R.Cast(bestCastPosition);

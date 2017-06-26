@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using T2IN1_REBORN_LIB.Helpers;
-
-using T2IN1_REBORN_WUKONG.Managers;
+﻿using T2IN1_REBORN_WUKONG.Managers;
 using T2IN1_REBORN_WUKONG.Visuals;
 
 using HesaEngine.SDK;
@@ -15,7 +12,7 @@ namespace T2IN1_REBORN_WUKONG.Modes
         {
             if (Menus.ComboMenu.Get<MenuCheckbox>("UseE").Checked)
             {
-                Obj_AI_Base target = Globals.CachedEnemies.Where(x => x.IsValidTarget(SpellsManager.E.Range)).MinOrDefault(x => x.Health);
+                Obj_AI_Base target = SpellsManager.E.GetBestTarget();
                 if (SpellsManager.E.IsUsable() && target.IsValidTarget(SpellsManager.E.Range)) 
                 {
                     SpellsManager.E.Cast(target);

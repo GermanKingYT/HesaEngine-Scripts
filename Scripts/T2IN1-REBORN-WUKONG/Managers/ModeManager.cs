@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Linq;
-using T2IN1_REBORN_LIB.Helpers;
 
 using T2IN1_REBORN_WUKONG.Modes;
 using T2IN1_REBORN_WUKONG.Visuals;
 using T2IN1_REBORN_WUKONG.Features;
 
 using HesaEngine.SDK;
-using HesaEngine.SDK.GameObjects;
 
 namespace T2IN1_REBORN_WUKONG.Managers
 {
@@ -20,7 +17,7 @@ namespace T2IN1_REBORN_WUKONG.Managers
                 /* TODO: TEMP TILL ON LEVEL UP IS FIXED */
                 AutoLeveler.TempFix();
 
-                Globals.CachedEnemies = Entities.GetEnemies;
+                Globals.CachedEnemies = Globals.GetEnemies;
 
                 if (Globals.MyHero.IsDead || Globals.MyHero.IsRecalling() || Chat.IsChatOpen)
                     return;

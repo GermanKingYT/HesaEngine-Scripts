@@ -4,9 +4,9 @@ using HesaEngine.SDK;
 
 namespace T2IN1_REBORN_AIO.Plugins
 {
-    internal class Testing : IPlugin
+    internal class Activator : IPlugin
     {
-        public string Name => "Testing Plugin";
+        public string Name => "Activator";
         public bool Initialized { get; set; }
         public Menu Menu { get; set; }
 
@@ -16,16 +16,9 @@ namespace T2IN1_REBORN_AIO.Plugins
 
             Menu = Globals.PluginMenu.AddSubMenu(Name);
 
-            Library.Extensions.PrintMessage("[T2IN1-REBORN-AIO]", " Test Plugin Loaded", "#27ae60");
-
-            Chat.OnChatMessage += OnMessage;
+            Library.Extensions.PrintMessage("[T2IN1-REBORN-AIO]", " Activator Plugin Loaded", "#27ae60");
 
             Initialized = true;
-        }
-
-        public static void OnMessage(string s)
-        {
-            Logger.Log("[OnMessage] Message:" + s);
         }
 
         public void Unload()
@@ -34,9 +27,7 @@ namespace T2IN1_REBORN_AIO.Plugins
 
             Menu.RemoveMenu();
 
-            Chat.OnChatMessage -= OnMessage;
-
-            Library.Extensions.PrintMessage("[T2IN1-REBORN-AIO]", " Test Plugin Unloaded", "#e74c3c");
+            Library.Extensions.PrintMessage("[T2IN1-REBORN-AIO]", " Activator Plugin Unloaded", "#e74c3c");
 
             Initialized = false;
         }

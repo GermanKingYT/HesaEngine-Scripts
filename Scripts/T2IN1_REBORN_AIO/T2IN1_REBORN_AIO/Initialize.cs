@@ -14,37 +14,24 @@ namespace T2IN1_REBORN_AIO
         public string Version => "1.0.0";
         public string Author => "RaINi";
 
-        private void OnPluginStateChanged(MenuCheckbox menuCheckbox, bool active)
-        {
-            IPlugin plugin = Library.Extensions.PluginList.Find(x => x.Name == menuCheckbox.Name);
-            if (plugin == null) return;
-
-            switch (active)
-            {
-                case true:
-                    plugin.Initialize();
-                    return;
-                case false:
-                    plugin.Unload();
-                    return;
-            }
-        }
-
         public void OnInitialize()
         {
             Game.OnGameLoaded += () =>
             {
-                Library.Extensions.PluginList = new List<IPlugin> { new Testing() };
+                Library.Extensions.PluginList = new List<IPlugin> { new AutoLeveler() };
 
                 Globals.RootMenu = Menu.AddMenu("[T2IN1-REBORN-AIO]");
                 Globals.PluginMenu = Globals.RootMenu.AddSubMenu("PLUGINS");
 
-                Library.Extensions.PluginList.ForEach(x => Globals.PluginMenu.AddSubMenu("Enabled").Add(new MenuCheckbox(x.Name, x.Name)).OnValueChanged += OnPluginStateChanged);
+                Library.Extensions.PluginList.ForEach(x => Globals.PluginMenu.AddSubMenu("Enabled").Add(new MenuCheckbox(x.Name, x.Name)).OnValueChanged += Library.Extensions.OnPluginStateChanged);
 
                 switch (ObjectManager.Me.Hero)
                 {
-                    case Champion.Ahri:
-                        Champions.Ahri.Initialize();
+                    case Champion.Ashe:
+                        Champions.Ashe.Initialize(); /* TODO: UNFINISHED */
+                        return;
+                    case Champion.Cassiopeia:
+                        Champions.Cassiopeia.Initialize(); /* TODO: UNFINISHED */
                         return;
                     default:
                         Library.Extensions.PrintMessage("[T2IN1-REBORN-AIO] ", ObjectManager.Player.ChampionName + " is not Supported!", "#e74c3c");

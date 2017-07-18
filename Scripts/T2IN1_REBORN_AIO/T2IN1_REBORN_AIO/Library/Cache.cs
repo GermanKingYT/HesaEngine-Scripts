@@ -51,7 +51,7 @@ namespace T2IN1_REBORN_AIO.Library
                 case MinionTeam.Ally:
                     return AllyMinions.FindAll(x => x.IsValidEntity() && x.IsInRange(ObjectManager.Me.Position, range));
                 default:
-                    throw new Exception("GJ M8 YOU BROKE IT -.-");
+                    throw new Exception("gj mate you broke it");
             }
         }
 

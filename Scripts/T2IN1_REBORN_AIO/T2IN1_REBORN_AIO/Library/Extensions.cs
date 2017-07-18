@@ -25,9 +25,28 @@ namespace T2IN1_REBORN_AIO.Library
         /* Plugins */
         public static List<IPlugin> PluginList { get; set; }
 
+        public static void OnPluginStateChanged(MenuCheckbox menuCheckbox, bool active)
+        {
+            IPlugin plugin = Library.Extensions.PluginList.Find(x => x.Name == menuCheckbox.Name);
+            if (plugin == null) return;
+
+            switch (active) 
+            {
+                case true:
+                    plugin.Initialize();
+                    return;
+                case false:
+                    plugin.Unload();
+                    return;
+            }
+        }
+
         /* Chat */
         public static void PrintMessage(string text, string hexColor) => Chat.Print("<font color='" + hexColor + "'>" + text + "</font>");
         public static void PrintMessage(string tag, string text, string hexColor) => Chat.Print("<font color='" + hexColor + "'>" + tag + "</font>" + text);
+
+        /* Console */
+        public static void Debug(string message, ConsoleColor color) => Console.WriteLine(message, color);
 
         /* Menu */
         public static void AddMenuCheckbox(this Menu menu, string name, string text, bool active) => menu.Add(new MenuCheckbox(name, text, active));
@@ -37,7 +56,7 @@ namespace T2IN1_REBORN_AIO.Library
         public static int GetSlider(this Menu menu, string name) => menu.Get<MenuSlider>(name).CurrentValue;
         public static int GetCombobox(this Menu menu, string name) => menu.Get<MenuCombo>(name).CurrentValue;
         public static void RemoveMenu(this Menu menu) => Menu.Remove(menu);
-        //public static void RemoveMenuEntry(this Menu menu, string entry) => Menu.Remove(menu.Item(entry) as Menu);
+        public static void RemoveMenuEntry(this Menu menu, MenuElement[] subMenus) { foreach (MenuElement subMenu in subMenus) menu.Remove(subMenu); }
 
         /* Checks */
         public static bool IsValidEntity(this Obj_AI_Base entity) => entity != null && entity.IsValid();

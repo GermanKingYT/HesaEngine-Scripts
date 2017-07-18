@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\Binaries\T2IN1-REBORN-AIO\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\Binaries\T2IN1-REBORN-AIO\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,12 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Champions\Ahri.cs" />
+    <Compile Include="Champions\Ashe.cs" />
+    <Compile Include="Champions\Cassiopeia.cs" />
     <Compile Include="Library\Extensions.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Library\Cache.cs" />
-    <Compile Include="Plugins\Testing.cs" />
+    <Compile Include="Plugins\Activator.cs" />
+    <Compile Include="Plugins\AutoLeveler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
